@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/public/duoshuo/duoshuo.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/public/js/admin.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/public/js/index.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/public/js/validate.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/includes/footer.jade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/includes/head.jade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/includes/header.jade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/layout.jade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/pages/admin.jade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/pages/detail.jade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/pages/index.jade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/pages/information.jade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/pages/list.jade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/pages/login.jade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/pages/register.jade" charset="UTF-8" />
+  </component>
+</project>

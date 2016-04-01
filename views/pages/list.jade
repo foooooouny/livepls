@@ -1,0 +1,73 @@
+extends ../layout
+
+block content
+
+  .modal.fade#checkModal(tabindex="-1",role="dialog",aria-labelledby="checkModalLabel")
+    .modal-dialog(role="document")
+        .modal-content
+            .modal-header
+                button.close(type="button",data-dismiss="modal",aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title#checkModalLabel 审核弹窗
+            .modal-body
+                form.form-horizontal#checkContent
+                    input#modalId(type="hidden", name="id")
+                    input#modalPoster(type="hidden", name="poster")
+                    input#modalPersonStatus(type="hidden", name="personstatus")
+                    .form-group
+                        label.col-sm-3.control-label(for="modalUserName") 用户名：
+                        .col-sm-9
+                            p#modalUserName.form-control-static(type="text",name="username")
+                    .form-group
+                        label.col-sm-3.control-label(for="modalNickName") 昵称：
+                        .col-sm-9
+                            p#modalNickName.form-control-static(type="text",name="nickname")
+                    .form-group
+                        label.col-sm-3.control-label(for="modalCreateAt") 注册日期：
+                        .col-sm-9
+                            p#modalCreateAt.form-control-static(type="text",name="createAt")
+                    .form-group
+                        label.col-sm-3.control-label(for="modalLiveUrl") 直播地址：
+                        .col-sm-9
+                            input#modalLiveUrl.form-control(type="text",name="liveurl")
+                    .form-group
+                        label.col-sm-3.control-label(for="modalPersonstatus") 状态：
+                        .col-sm-2
+                            label#modalPersonstatus.form-control-static(name="personstatus")
+                        .col-sm-2
+                            label#modalPersonstatus.form-control-static(style="color:red;") 升为
+                        .col-sm-5
+                            label#modalPersonstatus.form-control-static 主播
+
+            .modal-footer
+                button.btn.btn-default(type="button",data-dismiss="modal") 关闭
+                button.btn.btn-primary.checkAgree(type="button") 同意
+                button.btn.btn-danger.checkRefuse(type="button") 拒绝
+  .container
+    .row
+        table.table.table-hover.table-bordered
+            thead
+                tr
+                    th 用户名
+                    th 姓名
+                    th 昵称
+                    th 人物状态
+                    th 注册时间
+                    th 查看
+                    th 更新
+                    th 删除#{upgrade}
+            tbody
+               each item in users
+                    tr(class="item-id-#{item.id}")
+                        td #{item.username}
+                        td #{item.name}
+                        td #{item.nickname}
+                        td.list-check-parent #{item.personstatus}
+                            if ( item.upgrade == 1 && item.personstatus == "游客" )
+                                a.list-check(href="javascript:void(0)",data-toggle="modal",data-id="#{item.id}") 审核
+                        td #{item.createdate.Format('yyyy-MM-dd hh:mm:ss')}
+                        td: a(target="_blank", href="../user/#{item.id}") 查看
+                        td: a(target="_blank", href="../admin/update/#{item.id}") 修改
+                        td
+                            button.btn.btn-danger.del(type="button",data-id="#{item.id}") 删除
+  script(type="text/javascript",src="/js/admin.js")

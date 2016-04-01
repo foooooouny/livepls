@@ -1,0 +1,48 @@
+extends ../layout
+
+block content
+  .container
+    .row
+        form.form-horizontal(method="post", action="/admin/user/new")
+            input(type="hidden", name="id", value="#{user.id}")
+            .form-group
+                label.col-sm-2.control-label(for="inputUserName") 用户名
+                .col-sm-10
+                    input#inputUserName.form-control(type="text" , name="username" , value="#{user.username}")
+            .form-group
+                label.col-sm-2.control-label(for="inputPassWord") 密码
+                .col-sm-10
+                    input#inputPassWord.form-control(type="text" , name="password" , value="#{user.password}")
+            .form-group
+                label.col-sm-2.control-label(for="inputName") 姓名
+                .col-sm-10
+                    input#inputName.form-control(type="text" , name="name" , value="#{user.name}")
+            .form-group
+                label.col-sm-2.control-label(for="inputNickName") 昵称
+                .col-sm-10
+                    input#inputNickName.form-control(type="text" , name="nickname" , value="#{user.nickname}")
+            .form-group
+                label.col-sm-2.control-label(for="inputPersonStatus") 人物状态
+                .col-sm-10
+                    select#inputPersonStatus.form-control(type="text" , name="personstatus" , value="#{user.personstatus}")
+                        option(value="游客") 游客
+                        option(value="主播") 主播
+                        option(value="管理员") 管理员
+            .form-group
+                label.col-sm-2.control-label(for="inputPoster") 封面图
+                .col-sm-10
+                    input#inputPoster.form-control(type="text" , name="poster" , value="#{user.poster}")
+            .form-group
+                label.col-sm-2.control-label(for="inputLiveUrl") 视频地址
+                .col-sm-10
+                    input#inputLiveUrl.form-control(type="text" , name="liveurl" , value="#{user.liveurl}")
+            .form-group
+                label.col-sm-2.control-label(for="inputSummary") 简介
+                .col-sm-10
+                    input#inputSummary.form-control(type="text" , name="summary" , value="#{user.summary}")
+            .form-group
+                .col-sm-offset-2.col-sm-10
+                    button.btn.btn-default(type="submit") 操作
+  script(type="text/javascript",src="/js/index.js")
+
+                   

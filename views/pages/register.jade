@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+
+    .container
+        .row
+            form.form-horizontal#register
+                .form-group
+                    label.col-sm-2.control-label(for="inputUserName") 用户名
+                    .col-sm-10
+                        input#inputUserName.form-control(type="text" , name="username")
+                .form-group
+                    label.col-sm-2.control-label(for="inputPassword") 密码
+                    .col-sm-10
+                        input#inputPassword.form-control(type="password" , name="password")
+                .form-group
+                    label.col-sm-2.control-label(for="inputRePassword") 重复密码
+                    .col-sm-10
+                        input#inputRePassword.form-control(type="password" , name="repassword")
+                .form-group
+                    label.col-sm-2.control-label(for="inputName") 姓名
+                    .col-sm-10
+                        input#inputName.form-control(type="text" , name="name" )
+                .form-group
+                    label.col-sm-2.control-label(for="inputNickname") 昵称
+                    .col-sm-10
+                        input#inputNickname.form-control(type="text" , name="nickname" )
+                .form-group
+                    label.col-sm-2.control-label(for="inputSummary") 简介
+                    .col-sm-10
+                        textarea#inputSummary.form-control(type="text" , name="summary" )
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button.btn.btn-warning.registered(type="button") 注册
+    script(type="text/javascript" , src="/js/validate.js")
+                                        

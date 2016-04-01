@@ -1,0 +1,59 @@
+.modal.fade#apcModal(tabindex="-1",role="dialog",aria-labelledby="apcModalLabel")
+    .modal-dialog(role="document")
+        .modal-content
+            .modal-header
+                button.close(type="button",data-dismiss="modal",aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title#apcModalLabel 申请主播
+            .modal-body
+                form.form-horizontal#apcContent
+                    input#apcId(type="hidden", name="id")
+                    .form-group
+                        label.col-sm-3.control-label(for="apcUserName") 用户名：
+                        .col-sm-9
+                            p#apcUserName.form-control-static(name="username") #{myusername}
+                    .form-group
+                        label.col-sm-3.control-label(for="apcNickName") 昵称：
+                        .col-sm-9
+                            p#apcNickName.form-control-static(name="nickname") #{mynickname}
+                    .form-group
+                        label.col-sm-3.control-label(for="apcPoster") 封面：
+                        .col-sm-9
+                            input#apcPoster.form-control(type="text",name="poster")
+                    .form-group
+                        label.col-sm-3.control-label(for="apcStatus") 状态：
+                        .col-sm-9
+                            label#apcStatus.form-control-static(name="apcstatus") 申请主播
+            .modal-footer
+                button.btn.btn-default(type="button",data-dismiss="modal") 关闭
+                button.btn.btn-primary.submitApc(type="button") 提交申请
+.container.parentPosition(style="margin-bottom:30px;")
+    .row.parentPosition
+        .page-header(style="height:60px;margin:0;")
+            .col-md-8.col-sm-8.col-lg-8.absoultPostion(style="left:0px;")
+                a(href="/")
+                    img(src="http://7xr51b.com1.z0.glb.clouddn.com/live_logo.png",style="width:40px;")
+                label(style="font-size:24px;") &nbsp;#{title}
+            .col-md-4.col-sm-4.col-lg-4.absoultPostion(style="text-align:right;right:10px;")
+                - if (mypersonstatus)
+                    - if (mypersonstatus == "管理员")
+                        a(href="/admin/list") 用户列表&nbsp;&nbsp;&nbsp;&nbsp;
+                    - if (mypersonstatus == "游客")
+                        - if (myupgrade == 0 || myupgrade == null)
+                            button#userupgrade.btn.btn-primary(type="button",data-toggle="modal",data-id="#{myid}",data-target="#apcModal") 申请主播
+                        - else if (myupgrade == 1)
+                            code 申请中
+                    - else
+                        kbd #{mypersonstatus}
+                label &nbsp;&nbsp;&nbsp;&nbsp;
+                - if (mynickname)
+                    a(href="/user/my/#{myid}") #{mynickname}
+                    label &nbsp;&nbsp;&nbsp;&nbsp;
+                    a(href="/logout") 注销
+                - else
+                    .pull-right(style="height:30px;text-align:right;")
+                        a(href="/login") 登录
+                        label &nbsp;&nbsp;&nbsp;&nbsp;
+                        a(href="/register") 注册
+
+script(src="/js/index.js",type="text/javascript")

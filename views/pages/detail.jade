@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+
+  .container
+    .row
+        .col-md-12.anchorHeader
+            .col-md-1.anchorTitleImg
+                img(src="#{user.poster}")
+            .col-md-11.anchorTitleContent
+                p #{user.summary}
+                span.glyphicon.glyphicon-user(aria-hidden="true")
+                span.anchorFont &nbsp;#{user.nickname}
+        .col-md-9
+          #ivaPlayer(data-url="#{user.liveurl}",data-title="#{user.nickname}",style="width:90%;margin:0 auto;")
+        .col-md-3
+            .ds-thread(data-thread-key="#{user.id}",data-title="#{user.nickname}",data-url="#{user.liveurl}")
+            //dl.dl-horizontal
+            //    dt 昵称
+            //    dd= user.nickname
+            //    dt 身份
+            //    dd= user.personstatus
+            //    dt 简介
+            //    dd= user.summary
+  script(src="http://7xl3wn.com2.z0.glb.qiniucdn.com/socket.io.min.js",type="text/javascript")
+  script(src="http://7xjfim.com2.z0.glb.qiniucdn.com/Iva.js",type="text/javascript")
+  script(type="text/javascript",src="/js/ivaPlay.js")
+  script(type="text/javascript",src="/duoshuo/duoshuo.js")

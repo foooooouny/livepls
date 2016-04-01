@@ -1,0 +1,15 @@
+extends ../layout
+block content
+    .container
+        .row
+            each item in users
+                - if (item.personstatus == "主播")
+                    .col-md-2.col-sm-3
+                        .thumbnail
+                            a(href="/user/#{item.id}")
+                                img.anchorPoster(src="#{item.poster}",alt="#{item.nickname}")
+                            .caption
+                                //h6 #{item.summary}
+                                p: a.btn.btn-primary(href="/user/#{item.id}" , role="button") 观看直播
+                                span.glyphicon.glyphicon-user(aria-hidden="true")
+                                    label.anchorRoom &nbsp;#{item.nickname}
