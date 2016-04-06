@@ -1,7 +1,9 @@
 extends ../layout
 
 block content
-
+    //信息弹出框  --  BEGIN
+    #wrongMsg
+    //信息弹出框  --  END
     .container
         .row
             form.form-horizontal#register
@@ -33,4 +35,3 @@ block content
                     .col-sm-offset-2.col-sm-10
                         button.btn.btn-warning.registered(type="button") 注册
     script(type="text/javascript" , src="/js/validate.js")
-                                        

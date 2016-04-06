@@ -2,6 +2,9 @@
     .modal-dialog(role="document")
         .modal-content
             .modal-header
+                //信息弹出框  --  BEGIN
+                #wrongMsg
+                //信息弹出框  --  END
                 button.close(type="button",data-dismiss="modal",aria-label="Close")
                     span(aria-hidden="true") &times;
                 h4.modal-title#apcModalLabel 申请主播
@@ -27,6 +30,7 @@
             .modal-footer
                 button.btn.btn-default(type="button",data-dismiss="modal") 关闭
                 button.btn.btn-primary.submitApc(type="button") 提交申请
+
 .container.parentPosition(style="margin-bottom:30px;")
     .row.parentPosition
         .page-header(style="height:60px;margin:0;")

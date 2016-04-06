@@ -12,7 +12,8 @@ block content
                 span.glyphicon.glyphicon-user(aria-hidden="true")
                 span.anchorFont &nbsp;#{user.nickname}
         .col-md-9
-          #ivaPlayer(data-url="#{user.liveurl}",data-title="#{user.nickname}",style="width:90%;margin:0 auto;")
+          #flashcontent(data-url="#{user.liveurl}",data-title="#{user.nickname}",style="width:90%;margin:0 auto;")
+          input#flashUrl(type="hidden",data-url="#{user.liveurl}",data-title="#{user.nickname}")
         .col-md-3
             .ds-thread(data-thread-key="#{user.id}",data-title="#{user.nickname}",data-url="#{user.liveurl}")
             //dl.dl-horizontal
@@ -24,5 +25,6 @@ block content
             //    dd= user.summary
   script(src="http://7xl3wn.com2.z0.glb.qiniucdn.com/socket.io.min.js",type="text/javascript")
   script(src="http://7xjfim.com2.z0.glb.qiniucdn.com/Iva.js",type="text/javascript")
-  script(type="text/javascript",src="/js/ivaPlay.js")
+  script(src="/js/play/swfobject.js",type="text/javascript")
+  script(type="text/javascript",src="/js/play/ivaPlay.js")
   script(type="text/javascript",src="/duoshuo/duoshuo.js")

@@ -96,3 +96,13 @@ a:link{
     font-weight: 200;
     color: #747474;
 }
+
+
+#wrongMsg{
+    position: fixed;
+    top:20px;
+    left:50%;
+}
+.videoHidden {
+    display: none;
+}
