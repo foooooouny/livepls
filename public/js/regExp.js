@@ -1,62 +1,57 @@
 /**
  * Created by Administrator on 2016/4/5.
  */
-$(function(){
-//ÑéÖ¤
-    var filedTip = "alert-danger";
-    var successTip = "alert-success";
-//ÕýÔò±í´ïÊ½
+//æ­£åˆ™è¡¨è¾¾å¼
 
-//ÓÃ»§ÃûÕýÔò±í´ïÊ½
-    var userReg = /^[a-zA-Z]{6,10}$/;
-//ÖÐÎÄÕýÔò±í´ïÊ½
-    var nameReg = /^[\u4E00-\u9FA5\uF900-\uFA2D]{2,5}$/;  //°üº¬ÈÕÎÄºÍº«ÎÄ
-    var nickReg = /^[\u4E00-\u9FA5\uF900-\uFA2D]{3,10}$/;
-//Ó¢ÎÄ¡¢ÏÂ»®ÏßÕýÔò±í´ïÊ½
-    var pwdReg = /^[a-zA-Z0-9_]{6,20}$/;  //ÃÜÂëÖ»¿ÉÒÔ°üº¬×ÖÄ¸Êý×ÖÏÂ»®Ïß
+//ç”¨æˆ·åæ­£åˆ™è¡¨è¾¾å¼
+var userReg = /^[a-zA-Z]{6,10}$/;
+//ä¸­æ–‡æ­£åˆ™è¡¨è¾¾å¼
+var nameReg = /^[\u4E00-\u9FA5\uF900-\uFA2D]{2,5}$/;  //åŒ…å«æ—¥æ–‡å’ŒéŸ©æ–‡
+var nickReg = /^[\u4E00-\u9FA5\uF900-\uFA2D]{3,10}$/;
+//è‹±æ–‡ã€ä¸‹åˆ’çº¿æ­£åˆ™è¡¨è¾¾å¼
+var pwdReg = /^[a-zA-Z0-9_]{6,20}$/;  //å¯†ç åªå¯ä»¥åŒ…å«å­—æ¯æ•°å­—ä¸‹åˆ’çº¿
 
-    function alertMsg(data,tipStatus){
-
-        //ÅÐ¶ÏÒ³ÃæÉÏÊÇ·ñ´æÔÚÌáÊ¾¿ò
-
-        if($(".tipAlert").length > 0){
-            $(".tipAlert").alert('close');
-        }
-
-        var div = document.createElement("div");
-
-        var a = document.createElement("a");
-
-        var span = document.createElement("span");
-
-        div.setAttribute("class","alert videoHidden tipAlert " + tipStatus);
-
-        document.getElementById("wrongMsg").appendChild(div);
-
-        a.setAttribute("class","close");
-
-        a.setAttribute("data-dismiss","alert");
-
-        a.setAttribute("href","#");
-
-        var aText=document.createTextNode("¡Á");
-
-        a.appendChild(aText);
-
-        div.appendChild(a);
-
-        var spanText = document.createTextNode(data);
-
-        span.appendChild(spanText);
-
-        div.appendChild(span);
-
-        //$(".alert").fadeOut(function(){
-        //    $(".alert").fadeIn("slow");
-        //});
-
-        $(".tipAlert").fadeIn("slow");
+function alertMsg(data,divId,tipStatus){
+    //éªŒè¯
+    var Tip = "alert-" + tipStatus;
 
 
+    //åˆ¤æ–­é¡µé¢ä¸Šæ˜¯å¦å­˜åœ¨æç¤ºæ¡†
+
+    if($(".tipAlert").length > 0){
+        $(".tipAlert").alert('close');
     }
-});
+
+
+    var div = document.createElement("div");
+
+    var a = document.createElement("a");
+
+    var span = document.createElement("span");
+
+    div.setAttribute("class","alert videoHidden tipAlert " + Tip);
+
+    document.getElementById(divId).appendChild(div);
+
+    a.setAttribute("class","close");
+
+    a.setAttribute("data-dismiss","alert");
+
+    a.setAttribute("href","#");
+
+    var aText=document.createTextNode("Ã—");
+
+    a.appendChild(aText);
+
+    div.appendChild(a);
+
+    var spanText = document.createTextNode(data);
+
+    span.appendChild(spanText);
+
+    div.appendChild(span);
+
+    $(".tipAlert").fadeIn("slow");
+
+
+}

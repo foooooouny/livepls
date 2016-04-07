@@ -98,7 +98,7 @@ a:link{
 }
 
 
-#wrongMsg{
+.tipMsg{
     position: fixed;
     top:20px;
     left:50%;

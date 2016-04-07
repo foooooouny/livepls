@@ -440,7 +440,7 @@ app.delete('/delete/:id' , function (req , res) {
 
 //验证登录
 app.post('/admin/login' , function(req , res) {
-
+    console.log(req.body)
         login(req.body.username , req.body.password , function(data) {
             if(data.length > 0) {
                 console.log("登录成功");
@@ -457,9 +457,9 @@ app.post('/admin/login' , function(req , res) {
                     imgurl : data[0].poster
                 };
                 //登录完成后跳转首页
-                res.redirect("/");
+                res.json({success:1});
             } else {
-                res.redirect("/login");
+                res.json({success:0});
             }
         })
 });

@@ -7,7 +7,7 @@ block content
         .modal-content
             .modal-header
                 //信息弹出框  --  BEGIN
-                #wrongMsg
+                #listTip.tipMsg
                    //信息弹出框  --  END
                 button.close(type="button",data-dismiss="modal",aria-label="Close")
                     span(aria-hidden="true") &times;
@@ -73,4 +73,5 @@ block content
                         td: a(target="_blank", href="../admin/update/#{item.id}") 修改
                         td
                             button.btn.btn-danger.del(type="button",data-id="#{item.id}") 删除
+  script(type="text/javascript",src="/js/regExp.js")
   script(type="text/javascript",src="/js/admin.js")

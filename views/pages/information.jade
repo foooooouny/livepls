@@ -3,7 +3,7 @@ extends ../layout
 block content
 
     //信息弹出框  --  BEGIN
-    #wrongMsg
+    #informationTip.tipMsg
     //信息弹出框  --  END
     .container
         .row
@@ -59,4 +59,5 @@ block content
                             .form-group.form-control-static
                                 .col-sm-offset-2.col-sm-10
                                     button.btn.btn-primary.validatePwd(type="button") 修改密码
+    script(type="text/javascript",src="/js/regExp.js")
     script(type="text/javascript",src="/js/validate.js")

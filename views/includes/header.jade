@@ -3,7 +3,7 @@
         .modal-content
             .modal-header
                 //信息弹出框  --  BEGIN
-                #wrongMsg
+                #headerTip.tipMsg
                 //信息弹出框  --  END
                 button.close(type="button",data-dismiss="modal",aria-label="Close")
                     span(aria-hidden="true") &times;
@@ -60,4 +60,5 @@
                         label &nbsp;&nbsp;&nbsp;&nbsp;
                         a(href="/register") 注册
 
+script(src="/js/regExp.js",type="text/javascript")
 script(src="/js/index.js",type="text/javascript")

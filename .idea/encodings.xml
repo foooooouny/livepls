@@ -6,6 +6,7 @@
     <file url="file://$PROJECT_DIR$/public/js/admin.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/play/swfobject.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/public/js/regExp.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/validate.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/includes/footer.jade" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/includes/head.jade" charset="UTF-8" />
