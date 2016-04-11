@@ -22,15 +22,17 @@ $(function(){
                 url:'/myupgrade',
                 data:$("#apcContent").serialize()
             }).done(function(results) {
-                console.log(results.success);
-                if(results.success === 1 ) {
-                    alertMsg("申请成功",tipId,"success");
-                    location.reload();
-                }else if (results.success === 0) {
-                    alertMsg("重复申请！",tipId,"danger");
+                switch (results.success) {
+                    case 1:
+                        alertMsg("申请成功",tipId,"success");
                         location.reload();
-                } else {
-                    alertMsg("这是啥情况！",tipId,"danger");
+                        break;
+                    case 0:
+                        alertMsg("重复申请！",tipId,"danger");
+                        location.reload();
+                        break;
+                    default :
+                        alertMsg("这是啥情况！",tipId,"warning");
                 }
             })
         }

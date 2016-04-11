@@ -368,7 +368,6 @@ app.post('/admin/update' , function (req , res) {
                 if(data.affectedRows > 0){
                     //更新session
                     req.session.myUser.mypassword = req.body.newpassword;
-
                     console.log("修改成功" + data.affectedRows + "条数据");
                     res.json({success:data.affectedRows});
                 } else {
@@ -440,7 +439,7 @@ app.delete('/delete/:id' , function (req , res) {
 
 //验证登录
 app.post('/admin/login' , function(req , res) {
-    console.log(req.body)
+    console.log(req.body);
         login(req.body.username , req.body.password , function(data) {
             if(data.length > 0) {
                 console.log("登录成功");
@@ -504,7 +503,6 @@ app.get("/register" ,function(req , res) {
 app.post("/admin/register" , function (req ,res) {
     findOneByUserName(req.body.username , function(data) {
         if(data) {
-            console.log("用户名重复!");
             res.json({success:-1});
         } else {
             req.body.personstatus = "游客";

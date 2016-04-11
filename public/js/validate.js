@@ -32,10 +32,13 @@ $(function() {
                         url:'/admin/update',
                         data:$("#updatePassForm").serialize()
                     }).done(function (results) {
-                        if(results.success === 1){
-                            alertMsg("密码修改成功！",TipId,"success");
-                        } else if (results.success === 0) {
-                            alertMsg("密码修改失败！",TipId,"danger");
+                        switch (results.success) {
+                            case 1:
+                                alertMsg("密码修改成功！",TipId,"success");
+                                break;
+                            case 0:
+                                alertMsg("密码修改失败！",TipId,"danger");
+                                break;
                         }
                     })
                 }
@@ -81,10 +84,13 @@ $(function() {
                         url:'/admin/update',
                         data:$("#updateMessageForm").serialize()
                     }).done(function (results) {
-                        if(results.success === 1){
-                            alertMsg("修改密码成功！",TipId,"success");
-                        } else if (results.success === 0) {
-                            alertMsg("修改密码失败！",TipId,"danger");
+                        switch (results.success) {
+                            case 1:
+                                alertMsg("信息修改成功！",TipId,"success");
+                                break;
+                            case 0:
+                                alertMsg("信息修改失败！",TipId,"danger");
+                                break;
                         }
                     })
                 }
@@ -140,13 +146,17 @@ $(function() {
                     url:'/admin/register',
                     data:$("#register").serialize()
                 }).done(function (results) {
-                    if(results.success === 1) {
-                        alertMsg("注册成功！",tipId,"success");
-                        login(results.username,results.password,tipId);
-                    } else if (results.success === 0) {
-                        alertMsg("注册失败！",tipId,"danger");
-                    } else if (results.success === -1) {
-                        alertMsg("注册失败！用户名重复!",tipId,"danger");
+                    switch (results.success) {
+                        case 1:
+                            alertMsg("注册成功！",tipId,"success");
+                            login(results.username,results.password,tipId);
+                            break;
+                        case 0:
+                            alertMsg("注册失败！",tipId,"danger");
+                            break;
+                        case -1:
+                            alertMsg("注册失败！用户名重复!",tipId,"danger");
+                            break;
                     }
                 })
             }
@@ -175,11 +185,14 @@ $(function() {
                 url:'/admin/login',
                 data:$("#loginData").serialize()
             }).done(function (results) {
-                if(results.success === 1) {
-                    alertMsg("登录成功！",tipId,"success");
-                    location.replace("/");
-                } else if(results.success === 0) {
-                    alertMsg("用户名或密码错误！",tipId,"danger");
+                switch (results.success){
+                    case 1 :
+                        alertMsg("登录成功！",tipId,"success");
+                        location.replace("/");
+                        break;
+                    case 0 :
+                        alertMsg("用户名或密码错误！",tipId,"danger");
+                        break;
                 }
             });
         }
@@ -197,11 +210,14 @@ $(function() {
             data:{username:username,
                   password:password}
         }).done(function (results) {
-            if(results.success === 1) {
-                alertMsg("登录成功！",tipId,"success");
-                location.replace("/");
-            } else if(results.success === 0) {
-                alertMsg("用户名或密码错误！",tipId,"danger");
+            switch (results.success){
+                case 0 :
+                    alertMsg("登录成功！",tipId,"success");
+                    location.replace("/");
+                    break;
+                case 1 :
+                    alertMsg("用户名或密码错误！",tipId,"danger");
+                    break;
             }
         });
     }

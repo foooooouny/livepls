@@ -89,12 +89,15 @@ $(function() {
             url:'/user/upgrade/no',
             data:$("#checkContent").serialize()
         }).done(function (data) {
-            if(data.success === 1) {
-                alertMsg("拒绝成功",TipId,"success");
-                location.replace("/admin/list");
-            } else if (data.success === 0 ) {
-                alertMsg("操作失败",TipId,"danger");
-                location.replace("/admin/list");
+            switch (data.success) {
+                case 1:
+                    alertMsg("拒绝成功",TipId,"success");
+                    location.replace("/admin/list");
+                    break;
+                case 0:
+                    alertMsg("操作失败",TipId,"danger");
+                    location.replace("/admin/list");
+                    break;
             }
         })
     })
