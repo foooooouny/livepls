@@ -198,9 +198,12 @@ $(function() {
         }
     });
 
-
-
-
+    $(".select-item").click(function(e) {
+        if(!$(this).children('.list-group-item').hasClass('disabled')) {
+            $(this).siblings().children('.list-group-item').removeClass('disabled');
+            $(this).children('.list-group-item').addClass('disabled');
+        }
+    });
 
 
     function login(username,password,tipId) {

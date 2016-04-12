@@ -8,56 +8,63 @@ block content
     .container
         .row
             .col-xs-12.col-sm-3
+                div.list-group.bg-white.select-item.active
+                    a.list-group-item.disabled(href="#msg",data-toggle="tab") 信息设置
+                div.list-group.bg-white.select-item
+                    a.list-group-item(href="#hudong",data-toggle="tab") 互动设置
             .col-xs-12.col-sm-9
-                section.panel.panel-default.portlet-item
-                    header.panel-heading 个人信息
-                    section.panel-body
-                        form.form-horizontal#updateMessageForm
-                            input(type="hidden",name="id",value="#{user.id}")
-                            input(type="hidden",id="personstatus",name="personstatus",value="#{user.personstatus}")
-                            .form-group.form-control-static
-                                label.col-sm-2.control-label(for="inputUserName") 用户名：
-                                .col-sm-10
-                                    p#inputUserName.form-control-static(name="username") #{user.username}
-                            .form-group.form-control-static
-                                label.col-sm-2.control-label(for="inputNickName") 昵称
-                                .col-sm-10
-                                    input#inputNickName.form-control(type="text" , name="nickname" , value="#{user.nickname}")
-                            .form-group.form-control-static
-                                label.col-sm-2.control-label(for="inputPersonStatus") 身份：
-                                .col-sm-10
-                                    p#inputPersonStatus.form-control-static(name="personstatus") #{user.personstatus}
-                            - if (user.personstatus == "主播")
+                .fade.in.active#msg
+                    section.panel.panel-default.portlet-item
+                        header.panel-heading 个人信息
+                        section.panel-body
+                            form.form-horizontal#updateMessageForm
+                                input(type="hidden",name="id",value="#{user.id}")
+                                input(type="hidden",id="personstatus",name="personstatus",value="#{user.personstatus}")
                                 .form-group.form-control-static
-                                    label.col-sm-2.control-label(for="inputPersonPage") 我的页面：
+                                    label.col-sm-2.control-label(for="inputUserName") 用户名：
                                     .col-sm-10
-                                        p#inputPersonPage.form-control-static(name="personpage") #{perpage}
+                                        p#inputUserName.form-control-static(name="username") #{user.username}
                                 .form-group.form-control-static
-                                    label.col-sm-2.control-label(for="inputPoster") 封面
+                                    label.col-sm-2.control-label(for="inputNickName") 昵称
                                     .col-sm-10
-                                        input#inputPoster.form-control(type="text" , name="poster" , value="#{user.poster}")
-                            .form-group.form-control-static
-                                .col-sm-offset-2.col-sm-10
-                                    button.btn.btn-primary.validateMsg(type="button") 修改信息
-                section.panel.panel-default.portlet-item
-                    header.panel-heading 安全设置
-                    section.panel-body
-                        form.form-horizontal#updatePassForm
-                            input(type="hidden",name="id",value="#{user.id}")
-                            .form-group.form-control-static
-                                label.col-sm-2.control-label(for="inputOldPassword") 原密码
-                                .col-sm-10
-                                    input#inputOldPassword.form-control(type="password" , name="oldpassword")
-                            .form-group.form-control-static
-                                label.col-sm-2.control-label(for="inputNewPassword") 新密码
-                                .col-sm-10
-                                    input#inputNewPassword.form-control(type="password" , name="newpassword")
-                            .form-group.form-control-static
-                                label.col-sm-2.control-label(for="inputReNewPassword") 确认密码
-                                .col-sm-10
-                                    input#inputReNewPassword.form-control(type="password" , name="renewpassword")
-                            .form-group.form-control-static
-                                .col-sm-offset-2.col-sm-10
-                                    button.btn.btn-primary.validatePwd(type="button") 修改密码
+                                        input#inputNickName.form-control(type="text" , name="nickname" , value="#{user.nickname}")
+                                .form-group.form-control-static
+                                    label.col-sm-2.control-label(for="inputPersonStatus") 身份：
+                                    .col-sm-10
+                                        p#inputPersonStatus.form-control-static(name="personstatus") #{user.personstatus}
+                                - if (user.personstatus == "主播")
+                                    .form-group.form-control-static
+                                        label.col-sm-2.control-label(for="inputPersonPage") 我的页面：
+                                        .col-sm-10
+                                            p#inputPersonPage.form-control-static(name="personpage") #{perpage}
+                                    .form-group.form-control-static
+                                        label.col-sm-2.control-label(for="inputPoster") 封面
+                                        .col-sm-10
+                                            input#inputPoster.form-control(type="text" , name="poster" , value="#{user.poster}")
+                                .form-group.form-control-static
+                                    .col-sm-offset-2.col-sm-10
+                                        button.btn.btn-primary.validateMsg(type="button") 修改信息
+                    section.panel.panel-default.portlet-item
+                        header.panel-heading 安全设置
+                        section.panel-body
+                            form.form-horizontal#updatePassForm
+                                input(type="hidden",name="id",value="#{user.id}")
+                                .form-group.form-control-static
+                                    label.col-sm-2.control-label(for="inputOldPassword") 原密码
+                                    .col-sm-10
+                                        input#inputOldPassword.form-control(type="password" , name="oldpassword")
+                                .form-group.form-control-static
+                                    label.col-sm-2.control-label(for="inputNewPassword") 新密码
+                                    .col-sm-10
+                                        input#inputNewPassword.form-control(type="password" , name="newpassword")
+                                .form-group.form-control-static
+                                    label.col-sm-2.control-label(for="inputReNewPassword") 确认密码
+                                    .col-sm-10
+                                        input#inputReNewPassword.form-control(type="password" , name="renewpassword")
+                                .form-group.form-control-static
+                                    .col-sm-offset-2.col-sm-10
+                                        button.btn.btn-primary.validatePwd(type="button") 修改密码
+                .fade#hudong
+                    section
     script(type="text/javascript",src="/js/regExp.js")
     script(type="text/javascript",src="/js/validate.js")

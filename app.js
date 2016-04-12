@@ -178,7 +178,7 @@ app.get('/user/:id',function(req , res) {
 app.get('/user/my/:id' , function(req , res) {
     if(req.session.myUser) {
         var id = req.params.id;
-        findOne(id,function(data) {
+        findOne(id, function(data) {
             res.render('information', {
                 title: '个人信息页面',
                 user: data,
@@ -196,7 +196,7 @@ app.get('/user/my/:id' , function(req , res) {
 });
 
 //申请成为主播   0是未申请或被拒绝，1是申请中,2是申请通过
-app.post('/myupgrade' , function(req , res) {
+app.post('/myupgrade', function(req, res) {
     if(req.session.myUser) {
         updateUpgrade(req.session.myUser.personstatus,"",req.body.poster,1,req.session.myUser.myid , function(data) {
             if(data > 0) {
