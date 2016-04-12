@@ -211,11 +211,11 @@ $(function() {
                   password:password}
         }).done(function (results) {
             switch (results.success){
-                case 0 :
+                case 1 :
                     alertMsg("登录成功！",tipId,"success");
                     location.replace("/");
                     break;
-                case 1 :
+                case 0 :
                     alertMsg("用户名或密码错误！",tipId,"danger");
                     break;
             }

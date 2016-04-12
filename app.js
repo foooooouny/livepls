@@ -458,6 +458,7 @@ app.post('/admin/login' , function(req , res) {
                 //登录完成后跳转首页
                 res.json({success:1});
             } else {
+                console.log("登录失败");
                 res.json({success:0});
             }
         })
