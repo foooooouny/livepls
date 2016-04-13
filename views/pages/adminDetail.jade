@@ -1,0 +1,67 @@
+extends ../layout
+
+block content
+
+  .container
+    .row
+        //信息弹出框  --  BEGIN
+        #adminDetailTip.tipMsg
+        //信息弹出框  --  END
+        section.panel.panel-default.portlet-item
+            header.panel-heading 人物信息
+            section.panel-body
+                form.form-horizontal#adminDetailMsgForm
+                    input(type="hidden",name="id",value="#{user.id}")
+                    input(type="hidden",id="oldPassword",name="oldPassword",value="#{user.password}")
+                    input(type="hidden", id="personstatus", name="personstatus", value="#{user.personstatus}")
+                    .form-group.form-control-static
+                        label.col-sm-2.control-label(for="inputUserName") 用户名
+                        .col-sm-10
+                            input#inputUserName.form-control(type="text" , name="username" , value="#{user.username}")
+                    .form-group.form-control-static
+                        label.col-sm-2.control-label(for="inputPassWord") 密码
+                        .col-sm-10
+                            input#inputPassWord.form-control(type="password" , name="password" value="")
+                    .form-group.form-control-static
+                        label.col-sm-2.control-label(for="inputName") 姓名
+                        .col-sm-10
+                            input#inputName.form-control(type="text" , name="name" , value="#{user.name}")
+                    .form-group.form-control-static
+                        label.col-sm-2.control-label(for="inputNickName") 昵称
+                        .col-sm-10
+                            input#inputNickName.form-control(type="text" , name="nickname" , value="#{user.nickname}")
+                    .form-group.form-control-static
+                        label.col-sm-2.control-label(for="inputPoster") 封面图：
+                        .col-sm-10
+                            input#inputPoster.form-control(type="text" , name="poster" , value="#{user.poster}")
+                    .form-group.form-control-static
+                        label.col-sm-2.control-label(for="inputLiveUrl") 视频地址
+                        .col-sm-10
+                            input#inputLiveUrl.form-control(type="text" , name="liveurl" , value="#{user.liveurl}")
+                    .form-group.form-control-static
+                        label.col-sm-2.control-label(for="inputSummary") 简介
+                        .col-sm-10
+                            textarea#inputSummary.form-control(type="text",name="summary") #{user.summary}
+                    .form-group.form-control-static
+                        .col-sm-offset-2.col-sm-10
+                            button.btn.btn-primary.adminDetailData(type="button") 操作信息
+    - if(user.id != "")
+        section.panel.panel-default.portlet-item
+            header.panel-heading 人物状态
+            section.panel-body
+                form.form-horizontal#adminDetailPersonStatusForm
+                    input(type="hidden", name="id", value="#{user.id}")
+                    input(type="hidden", id="oldPersonStatus", value="#{user.personstatus}")
+                    .form-group.form-control-static
+                        label.col-sm-2.control-label(for="inputOldPassword") 人物状态
+                        .col-sm-10
+                            select#selectPersonStatus.form-control(type="text" , name="personstatus")
+                                option(value="游客") 游客
+                                option(value="主播") 主播
+                                option(value="管理员") 管理员
+                    .form-group.form-control-static
+                        .col-sm-offset-2.col-sm-10
+                            button.btn.btn-primary.adminDetailPersonStatus(type="button") 操作状态
+  script(type="text/javascript",src="/js/adminDetail/index.js")
+
+                   

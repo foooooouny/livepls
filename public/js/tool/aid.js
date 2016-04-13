@@ -52,6 +52,17 @@ function alertMsg(data,divId,tipStatus){
     div.appendChild(span);
 
     $(".tipAlert").fadeIn("slow");
-
-
 }
+
+//计算字符串长度，中文占用2个字符，英文占用一个字符
+String.prototype.mylen = function() {
+    var len=0,i = 0;
+    for (i;i<this.length;i++) {
+        if (this.charCodeAt(i) > 127 || this.charCodeAt(i) == 94) {
+            len += 2;
+        } else {
+            len ++;
+        }
+    }
+    return len;
+};

@@ -43,7 +43,7 @@ block content
                                             input#inputPoster.form-control(type="text" , name="poster" , value="#{user.poster}")
                                 .form-group.form-control-static
                                     .col-sm-offset-2.col-sm-10
-                                        button.btn.btn-primary.validateMsg(type="button") 修改信息
+                                        button.btn.btn-primary.updatePersonMsg(type="button") 修改信息
                     section.panel.panel-default.portlet-item
                         header.panel-heading 安全设置
                         section.panel-body
@@ -63,8 +63,8 @@ block content
                                         input#inputReNewPassword.form-control(type="password" , name="renewpassword")
                                 .form-group.form-control-static
                                     .col-sm-offset-2.col-sm-10
-                                        button.btn.btn-primary.validatePwd(type="button") 修改密码
+                                        button.btn.btn-primary.updatePersonPwd(type="button") 修改密码
                 .fade#hudong
                     section
-    script(type="text/javascript",src="/js/regExp.js")
-    script(type="text/javascript",src="/js/validate.js")
+    script(type="text/javascript",src="/js/tool/aid.js")
+    script(type="text/javascript",src="/js/information/index.js")

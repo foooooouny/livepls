@@ -69,9 +69,11 @@ block content
                             if ( item.upgrade == 1 && item.personstatus == "游客" )
                                 a.list-check(href="javascript:void(0)",data-toggle="modal",data-id="#{item.id}") 审核
                         td #{item.createdate.Format('yyyy-MM-dd hh:mm:ss')}
-                        td: a(target="_blank", href="../user/#{item.id}") 查看
-                        td: a(target="_blank", href="../admin/update/#{item.id}") 修改
+                        td
+                          - if(item.personstatus == "主播")
+                             a(target="_blank", href="../user/#{item.id}") 查看
+                        td: a(target="_blank", href="../adminDetail/update/#{item.id}") 修改
                         td
                             button.btn.btn-danger.del(type="button",data-id="#{item.id}") 删除
-  script(type="text/javascript",src="/js/regExp.js")
-  script(type="text/javascript",src="/js/admin.js")
+  script(type="text/javascript",src="/js/tool/aid.js")
+  script(type="text/javascript",src="/js/list/index.js")

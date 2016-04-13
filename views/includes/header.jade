@@ -41,7 +41,7 @@
             .col-md-4.col-sm-4.col-lg-4.absoultPostion(style="text-align:right;right:10px;")
                 - if (mypersonstatus)
                     - if (mypersonstatus == "管理员")
-                        a(href="/admin/list") 用户列表&nbsp;&nbsp;&nbsp;&nbsp;
+                        a(href="/adminDetail/list") 用户列表&nbsp;&nbsp;&nbsp;&nbsp;
                     - if (mypersonstatus == "游客")
                         - if (myupgrade == 0 || myupgrade == null)
                             button#userupgrade.btn.btn-primary(type="button",data-toggle="modal",data-id="#{myid}",data-target="#apcModal") 申请主播
@@ -60,5 +60,5 @@
                         label &nbsp;&nbsp;&nbsp;&nbsp;
                         a(href="/register") 注册
 
-script(src="/js/regExp.js",type="text/javascript")
-script(src="/js/index.js",type="text/javascript")
+script(src="/js/tool/aid.js",type="text/javascript")
+script(src="/js/header/index.js",type="text/javascript")

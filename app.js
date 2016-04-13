@@ -59,6 +59,7 @@ function handleDisconnect() {
         }
     })
 }
+
 handleDisconnect();
 
 
@@ -115,6 +116,8 @@ var updatePassSQL = "update videojj_live_user set password = ? , updatedate = ? 
 var updateMsgSQL = "update videojj_live_user set poster = ? , nickname = ? , updatedate = ? where username = ? and id = ?";
 
 var updateUpgradeSQL = "update videojj_live_user set personstatus = ? , liveurl = ? , poster = ? , upgrade = ? , upgradedate = ? where id = ?";
+
+var updatePersonStatus =  "update videojj_live_user set personstatus = ? , updatedate = ? where id = ?";
 
 var loginSQL = "select * from videojj_live_user where username = ? and password = ? ";
 //sql语句  -----------    end
@@ -220,6 +223,7 @@ app.post('/user/upgrade/yes' , function(req , res) {
         updateUpgrade("主播",req.body.liveurl,req.body.poster,2,req.body.id , function (data) {
             if(data > 0) {
                 console.log("成功审核了" + data + "个人");
+                console.log("人物状态改变(游客==》主播)");
                 req.session.myUser.myupgrade = 2;
                 res.json({success:data});
             } else {
@@ -261,7 +265,7 @@ app.get('/checkUser/:id' , function(req , res) {
                     data.createdate = data.createdate.Format("yyyy-MM-dd hh:mm:ss");
                     res.json({success:data});
                 } else {
-                    res.redirect("/admin/list");
+                    res.redirect("/adminDetail/list");
                 }
             })
         }
@@ -270,7 +274,7 @@ app.get('/checkUser/:id' , function(req , res) {
     }
 });
 //管理员列表页面
-app.get('/admin/list',function(req , res) {
+app.get('/adminDetail/list',function(req , res) {
     if(req.session.myUser) {
         if(req.session.myUser.personstatus != "管理员") {
             res.redirect("/");
@@ -294,13 +298,14 @@ app.get('/admin/list',function(req , res) {
 });
 
 //管理员添加界面
-app.get('/admin/user',function(req , res) {
+app.get('/adminDetail/user',function(req , res) {
     if(req.session.myUser.personstatus != "管理员") {
         res.redirect("/");
     } else {
-        res.render('admin', {
+        res.render('adminDetail', {
             title: '后台管理页面',
             user: {
+                id:'',
                 username: '',
                 password: '',
                 name: '',
@@ -318,35 +323,17 @@ app.get('/admin/user',function(req , res) {
          });
     }
 });
-//添加数据
 
-app.post('/admin/user/new',function(req , res) {
-    var id = req.body.id;
-    if( id !== "undefined") {
-        updateOne(req.body,function(data) {
-            if(data.affectedRows > 0) {
-                console.log("成功修改" + data.affectedRows + "条数据");
-                res.redirect("/admin/list");
-            }
-        })
-    } else {
-        addOne(req.body,function(data) {
-            if(data.affectedRows > 0) {
-                console.log("成功插入" + data.affectedRows + "条数据");
-                res.redirect("/admin/list");
-            }
-        });
-    }
-});
 
-//更新数据    -     1
-app.get('/admin/update/:id' , function (req , res) {
+
+//进入更新数据页面  -- adminDetail
+app.get('/adminDetail/update/:id' , function (req , res) {
     var id = req.params.id;
     if(isNaN(req.session.myUser.myid) || req.session.myUser.personstatus != "管理员") {
         res.redirect("/login");
     } else {
         findOne(id,function(data) {
-            res.render('admin',{
+            res.render('adminDetail',{
                 title:'后台管理页面',
                 user:data,
                 myusername:req.session.myUser.myusername,
@@ -358,68 +345,99 @@ app.get('/admin/update/:id' , function (req , res) {
         });
     }
 });
-//更新数据    -     2
-app.post('/admin/update' , function (req , res) {
-    if(req.body.id != req.session.myUser.myid){
+//管理员操作信息
+app.post('/admin/update/data', function (req, res) {
+    if(!req.session.myUser.myid){
         res.redirect("/login");
-    } else if(req.body.oldpassword != undefined && req.body.newpassword != undefined){
-       if (req.body.oldpassword == req.session.myUser.mypassword) {
-            updatePass(req.body.newpassword,req.session.myUser.myusername,req.session.myUser.myid , function(data) {
-                if(data.affectedRows > 0){
-                    //更新session
-                    req.session.myUser.mypassword = req.body.newpassword;
-                    console.log("修改成功" + data.affectedRows + "条数据");
-                    res.json({success:data.affectedRows});
-                } else {
-                    console.log("修改失败");
-                    res.json({success:data.affectedRows});
-                }
-            })
-        } else {
-            res.json({success:0});
-        }
-    } else if (req.body.nickname != undefined) {
-        if(req.body.personstatus == "主播") {
-            if(req.body.poster != undefined) {
-                updateMsg(req.body.nickname,req.body.poster, req.session.myUser.myusername ,req.body.id,  function(data) {
-                    if(data.affectedRows > 0) {
-                        //更新session
-                        req.session.myUser.poster = req.body.poster;
-                        req.session.myUser.nickname = req.body.nickname;
-
-                        console.log("修改成功" + data.affectedRows + "条数据");
-                        res.json({success:data.affectedRows});
-                    } else {
-                        console.log("修改失败");
-                        res.json({success:data.affectedRows});
-                    }
-                })
-            }
-        } else if(req.body.personstatus == "游客") {
-            updateMsg(req.body.nickname,"", req.session.myUser.myusername , req.body.id, function(data) {
-                if(data.affectedRows > 0) {
-                    //更新session
-                    req.session.myUser.nickname = req.body.nickname;
-
-                    console.log("修改成功" + data.affectedRows + "条数据");
-                    res.json({success:data.affectedRows});
-                } else {
-                    console.log("修改失败");
-                    res.json({success:data.affectedRows});
-                }
-            })
-        }
-    } else {
-        updateOne(req.body , function (data) {
+    }else {
+        updateOne(req.body, function (data) {
             if(data.affectedRows > 0){
                 console.log("成功修改" + data.affectedRows + "行数据");
                 res.json({success:data.affectedRows});
-                res.redirect("/admin/list");
             } else {
                 console.log("修改失败");
                 res.json({success:data.affectedRows});
             }
         });
+    }
+});
+
+//管理员操作状态
+app.post('/admin/update/pstatus', function (req, res) {
+    if(!req.session.myUser.myid){
+        res.redirect("/login");
+    }else {
+        updateOnePStatus(req.body.id, req.body.personstatus, function (data) {
+            if(data.affectedRows > 0){
+                console.log("成功修改状态" + data.affectedRows + "个");
+                res.json({success:data.affectedRows});
+            } else {
+                console.log("修改状态失败");
+                res.json({success:data.affectedRows});
+            }
+        });
+    }
+});
+
+//修改个人信息  -- msg
+
+app.post("/person/update/msg",function(req, res){
+    if(req.body.id != req.session.myUser.myid){
+        res.redirect("/login");
+    }else{
+        if(req.body.personstatus == "主播" && req.body.poster != undefined && req.body.nickname != undefined) {
+            updateMsg(req.body.nickname,req.body.poster, req.session.myUser.myusername ,req.body.id,  function(data) {
+                if(data.affectedRows > 0) {
+                    //更新session
+                    req.session.myUser.poster = req.body.poster;
+                    req.session.myUser.nickname = req.body.nickname;
+
+                    console.log("主播修改信息成功" + data.affectedRows + "条");
+                    res.json({success:data.affectedRows});
+                } else {
+                    console.log("主播修改信息失败");
+                    res.json({success:data.affectedRows});
+                }
+            })
+        } else if(req.body.personstatus == "游客" || req.body.personstatus == "管理员" && req.body.body.nickname != undefined) {
+            updateMsg(req.body.nickname,"", req.session.myUser.myusername , req.body.id, function(data) {
+                if(data.affectedRows > 0) {
+                    //更新session
+                    req.session.myUser.nickname = req.body.nickname;
+                    console.log("游客修改信息成功" + data.affectedRows + "条");
+                    res.json({success:data.affectedRows});
+                } else {
+                    console.log("游客修改信息失败");
+                    res.json({success:data.affectedRows});
+                }
+            })
+        }
+    }
+});
+
+//修改个人信息  -- pwd
+
+app.post("/person/update/pwd",function(req, res){
+    if(req.body.id != req.session.myUser.myid){
+        res.redirect("/login");
+    }else{
+        if(req.body.oldpassword != undefined && req.body.newpassword != undefined){
+            if (req.body.oldpassword == req.session.myUser.mypassword) {
+                updatePass(req.body.newpassword,req.session.myUser.myusername,req.session.myUser.myid , function(data) {
+                    if(data.affectedRows > 0){
+                        //更新session
+                        req.session.myUser.mypassword = req.body.newpassword;
+                        console.log("修改密码成功" + data.affectedRows + "条数据");
+                        res.json({success:data.affectedRows});
+                    } else {
+                        console.log("修改密码失败");
+                        res.json({success:data.affectedRows});
+                    }
+                })
+            } else {
+                res.json({success:0});
+            }
+        }
     }
 });
 //删除数据
@@ -438,7 +456,7 @@ app.delete('/delete/:id' , function (req , res) {
 });
 
 //验证登录
-app.post('/admin/login' , function(req , res) {
+app.post('/adminDetail/login' , function(req , res) {
     console.log(req.body);
         login(req.body.username , req.body.password , function(data) {
             if(data.length > 0) {
@@ -501,7 +519,7 @@ app.get("/register" ,function(req , res) {
 });
 
 //执行注册系统
-app.post("/admin/register" , function (req ,res) {
+app.post("/adminDetail/register" , function (req ,res) {
     findOneByUserName(req.body.username , function(data) {
         if(data) {
             res.json({success:-1});
@@ -575,6 +593,17 @@ function deleteOne(id ,callback) {
 function updateOne(data , callback){
     var dateTime = new Date().Format("yyyy-MM-dd hh:mm:ss");
     conn.query(updateSQL,[data.username,data.password,data.name,data.nickname,data.personstatus,data.liveurl,dateTime,data.summary,data.poster,data.id] , function(err , rows ,fields) {
+        if(err) {
+            throw  err;
+        }
+        return callback(rows);
+    });
+}
+
+//根据id修改人物状态
+function updateOnePStatus(id, pstatus, callback) {
+    var dateTime = new Date().Format("yyyy-MM-dd hh:mm:ss");
+    conn.query(updatePersonStatus,[pstatus, dateTime, id] , function(err , rows ,fields) {
         if(err) {
             throw  err;
         }
@@ -657,7 +686,7 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 
 
-//app.post('/admin/movie/new',function (req , res) {
+//app.post('/adminDetail/movie/new',function (req , res) {
 //    addOne(req.body,function(data){
 //        if(data.affectedRows > 0) {
 //            console.log("成功添加" + data.affectedRows + "行数据");
@@ -666,7 +695,7 @@ Date.prototype.Format = function (fmt) { //author: meizz
 //        }
 //    });
 //});
-//app.post('/admin/movie/new',function(req,res){
+//app.post('/adminDetail/movie/new',function(req,res){
 //    var id = req.body._id;
 //    var movieObj = req.body;
 //    var _movie;
