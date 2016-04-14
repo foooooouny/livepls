@@ -299,7 +299,7 @@ app.get('/adminDetail/list',function(req , res) {
 
 //管理员添加界面
 app.get('/adminDetail/user',function(req , res) {
-    if(req.session.myUser.personstatus != "管理员") {
+    if(!req.session.myUser || req.session.myUser.personstatus != "管理员") {
         res.redirect("/");
     } else {
         res.render('adminDetail', {

@@ -2,12 +2,10 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/public/js/admin.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/adminDetail/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/detail/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/detail/play/swfobject.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/header/index.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/public/js/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/index/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/information/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/list/index.js" charset="UTF-8" />
@@ -15,7 +13,6 @@
     <file url="file://$PROJECT_DIR$/public/js/register/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/tool/aid.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/tool/duoshuo/duoshuo.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/public/js/validate.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/includes/footer.jade" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/includes/head.jade" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/views/includes/header.jade" charset="UTF-8" />

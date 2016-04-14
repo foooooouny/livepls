@@ -2,8 +2,9 @@
  * Created by Administrator on 2016/4/13.
  */
 var personStatus = $("#oldPersonStatus").val();
-$("#selectPersonStatus").val(personStatus);
-
+if(personStatus) {
+    $("#selectPersonStatus").val(personStatus);
+}
 
 //操作信息
 $(".adminDetailData").click(function() {
