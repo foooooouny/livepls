@@ -3,15 +3,15 @@
  */
 
 
-Date.prototype.Format = function (fmt) { //author: meizz
+format = function (fmt) { //author: meizz
     var o = {
-        "M+": this.getMonth() + 1, //‘¬∑›
-        "d+": this.getDate(), //»’
-        "h+": this.getHours(), //–° ±
-        "m+": this.getMinutes(), //∑÷
-        "s+": this.getSeconds(), //√Î
-        "q+": Math.floor((this.getMonth() + 3) / 3), //ºæ∂»
-        "S": this.getMilliseconds() //∫¡√Î
+        "M+": this.getMonth() + 1, //Êúà‰ªΩ
+        "d+": this.getDate(), //Êó•
+        "h+": this.getHours(), //Â∞èÊó∂
+        "m+": this.getMinutes(), //ÂàÜ
+        "s+": this.getSeconds(), //Áßí
+        "q+": Math.floor((this.getMonth() + 3) / 3), //Â≠£Â∫¶
+        "S": this.getMilliseconds() //ÊØ´Áßí
     };
     if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
     for (var k in o)
@@ -20,4 +20,4 @@ Date.prototype.Format = function (fmt) { //author: meizz
 };
 
 
-module.exports = Data.prototype.Format;
+module.exports = format;

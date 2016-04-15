@@ -1,12 +1,12 @@
 
-module.exports.db_config = {
+db_config = {
     connectionLimit: 10,
     host:"qdm175441403.my3w.com",
     user:"qdm175441403",
     password:"yzb960104",
     database:"qdm175441403_db",
     port:"3306",
-    expiration:3600000,    //ÉèÖÃsession´æ´¢Ê±¼ä
+    expiration:3600000,    //è®¾ç½®sessionå­˜å‚¨æ—¶é—´
     createDatabaseTable:true,
     schema:{
         tableName: 'sessions',
@@ -18,5 +18,6 @@ module.exports.db_config = {
     }
 };
 
+module.exports = db_config;
 
 

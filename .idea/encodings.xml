@@ -2,6 +2,12 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/connection/connection.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/connection/server.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/features/sqlFunction.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/features/sqlQuery.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/unit/dataFormat.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/unit/mysql.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/adminDetail/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/detail/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/detail/play/swfobject.js" charset="UTF-8" />
