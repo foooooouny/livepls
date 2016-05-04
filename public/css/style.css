@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Hiragino Sans GB','Microsoft YaHei','Î¢ÈíÑÅºÚ','WenQuanYi Micro Hei',sans-serif;
+    font-family: 'Hiragino Sans GB','Microsoft YaHei','Î¢ï¿½ï¿½ï¿½Åºï¿½','WenQuanYi Micro Hei',sans-serif;
 }
 a:link{
     text-decoration: none;
@@ -84,7 +84,7 @@ a:link{
 .anchorTitleContent {
     font-size: 20px;
     font-weight: bold;
-    font-family: Î¢ÈíÑÅºÚ;
+    font-family: Î¢ï¿½ï¿½ï¿½Åºï¿½;
 }
 .anchorTitleContent span{
     font-size: 12px;
@@ -105,4 +105,12 @@ a:link{
 }
 .videoHidden {
     display: none;
+}
+
+.setting-panel.active {
+  display: block;
+}
+
+.setting-panel {
+  display: none;
 }

@@ -1,5 +1,19 @@
 {
+  "name": "livepls",
+  "version": "0.0.1",
+  "description": "直播平台demo",
+  "main": "app.js",
   "dependencies": {
-    "express-mysql-session": "^1.0.0-rc.0"
+    "body-parser": "^1.15.0",
+    "cheerio": "^0.20.0",
+    "express": "^4.13.4",
+    "express-mysql-session": "^1.0.0-rc.0",
+    "express-session": "^1.13.0",
+    "jade": "^1.11.0",
+    "jsonwebtoken": "^6.2.0",
+    "multer": "^1.1.0",
+    "mysql": "^2.10.2",
+    "orm": "^3.0.0",
+    "passport": "^0.3.2"
   }
 }

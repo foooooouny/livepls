@@ -3,10 +3,12 @@
 // */
 
 ///   node      模块化
-
+var jwt = require('jsonwebtoken')
 var app = require('./models/connection/server');
 
 var fun = require('./models/features/sqlFunction');
+
+var config = require('./config')
 
 //首页
 app.get('/',function(req , res) {
@@ -58,8 +60,16 @@ app.get('/user/:id',function(req , res) {
 //个人信息页面
 app.get('/user/my/:id' , function(req , res) {
     if(req.session.myUser) {
-        var id = req.params.id;
-        fun.findOne(id, function(data) {
+        var userId = req.params.id;
+
+        var token = jwt.sign({
+            platformId: config.actilive.platformId,
+            userId: userId,
+        }, config.actilive.secret, {
+            expiresIn: 60 * 60 * 24 * 7, // s
+        })
+
+        fun.findOne(userId, function(data) {
             res.render('information', {
                 title: '个人信息页面',
                 user: data,
@@ -68,7 +78,10 @@ app.get('/user/my/:id' , function(req , res) {
                 myupgrade:req.session.myUser.myupgrade,
                 mynickname:req.session.myUser.nickname,
                 myid:req.session.myUser.myid,
-                perpage:req.session.myUser.personpage
+                perpage:req.session.myUser.personpage,
+                apiHost: config.actilive.apiHost,
+                platformId: config.actilive.platformId,
+                token: token,
             });
         });
     } else {
@@ -415,4 +428,3 @@ app.post("/adminDetail/register" , function (req ,res) {
         }
     })
 });
-
