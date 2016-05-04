@@ -22,10 +22,10 @@ app.use(session({
     saveUninitializd: true
 }));
 
-var conn;
+var conn = {conn: null};
 function handleDisconnect() {
-    conn = mysql.createConnection(db_config);
-    conn.connect(function(err) {
+    conn.conn = mysql.createConnection(db_config);
+    conn.conn.connect(function(err) {
         if(err){
             console.log("进行断线重连" + new Date());
             setTimeout(handleDisconnect,2000);
@@ -33,7 +33,7 @@ function handleDisconnect() {
         }
         console.log("连接成功");
     });
-    conn.on('error' , function(err) {
+    conn.conn.on('error' , function(err) {
         console.log('db error' , err);
         if(err.code === 'PROTOCOL_CONNECTION_LOST') {
             handleDisconnect();
