@@ -16,7 +16,7 @@ var sessionStore = new MySQLStore(db_config);
 
 app.use(session({
     key : 'session_user',
-    secret: 'session_secret',
+    secret: 'yzbissbsecret',
     store: sessionStore,
     resave: true,
     saveUninitializd: true

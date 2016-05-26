@@ -6,7 +6,7 @@ db_config = {
     password:"yzb960104",
     database:"qdm175441403_db",
     port:"3306",
-    expiration:3600000,    //设置session存储时间
+    expiration: 30 * 24 * 60 * 60 * 1000,    //设置session存储时间
     createDatabaseTable:true,
     schema:{
         tableName: 'sessions',
@@ -19,5 +19,3 @@ db_config = {
 };
 
 module.exports = db_config;
-
-
