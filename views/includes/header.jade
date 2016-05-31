@@ -42,13 +42,14 @@
                 - if (mypersonstatus)
                     - if (mypersonstatus == "管理员")
                         a(href="/adminDetail/list") 用户列表&nbsp;&nbsp;&nbsp;&nbsp;
+                    - if (mypersonstatus == "主播")
+                        a(href="/user/#{myid}") 我的房间&nbsp;&nbsp;
                     - if (mypersonstatus == "游客")
                         - if (myupgrade == 0 || myupgrade == null)
                             button#userupgrade.btn.btn-primary(type="button",data-toggle="modal",data-id="#{myid}",data-target="#apcModal") 申请主播
                         - else if (myupgrade == 1)
                             code 申请中
-                    - else
-                        a(href="/user/#{myid}") 我的房间&nbsp;&nbsp;
+                    - else 
                         kbd #{mypersonstatus}
                 label &nbsp;&nbsp;&nbsp;&nbsp;
                 - if (mynickname)
