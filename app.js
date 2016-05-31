@@ -35,36 +35,50 @@ app.get('/',function(req , res) {
 //主播展示页面
 app.get('/user/:id',function(req , res) {
     var id = req.params.id;
-    if(req.session.myUser) {
-        fun.findOne(id,function(data) {
-            res.render('detail', {
-                title: data.nickname + '的直播间',
-                user: data,
-                myusername:req.session.myUser.myusername,
-                mypersonstatus:req.session.myUser.personstatus,
-                myupgrade:req.session.myUser.myupgrade,
-                mynickname:req.session.myUser.nickname,
-                myid:req.session.myUser.myid
-            });
-        });
-    }else {
-        fun.findOne(id,function(data) {
-            res.render('detail', {
-                title: data.nickname + '的直播间',
-                user: data
-            });
-        });
-    }
+    fun.findOne(id, function(data) {
 
+      var renderData = {
+        title: data.nickname + '的直播间',
+        user: data,
+        platformUserId: id,
+        platformId: config.actilive.platformId,
+      }
+
+      if (req.session.myUser) { // 登录帐号
+        Object.assign(renderData, {
+          myusername:req.session.myUser.myusername,
+          mypersonstatus:req.session.myUser.personstatus,
+          myupgrade:req.session.myUser.myupgrade,
+          mynickname:req.session.myUser.nickname,
+          myid:req.session.myUser.myid,
+        })
+
+        if (req.session.myUser.myid == id ||
+          req.session.myUser.personstatus == '管理员') { // 主播的帐号 或 管理员帐号
+          var token = jwt.sign({
+              platformId: config.actilive.platformId,
+              platformUserId: id,
+          }, config.actilive.secret, {
+              expiresIn: 60 * 60 * 24 * 7, // s
+          })
+          renderData.token = token
+        }
+
+        res.render('detail', renderData);
+      } else { //游客
+        res.render('detail', renderData);
+      }
+    })
 });
+
+
 //个人信息页面
 app.get('/user/my/:id' , function(req , res) {
-    if(req.session.myUser) {
-        var userId = req.params.id;
-
+    var userId = req.params.id;
+    if (req.session.myUser && req.session.myUser.myid == userId) {
         var token = jwt.sign({
             platformId: config.actilive.platformId,
-            userId: userId,
+            platformUserId: userId,
         }, config.actilive.secret, {
             expiresIn: 60 * 60 * 24 * 7, // s
         })

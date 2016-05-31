@@ -1,2 +1,2 @@
 start:
-	git pull && npm install && node app.js
+	git pull && npm install && pkill node && node app.js
