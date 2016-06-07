@@ -93,7 +93,7 @@ app.get('/user/my/:id' , function(req , res) {
                 mynickname:req.session.myUser.nickname,
                 myid:req.session.myUser.myid,
                 perpage:req.session.myUser.personpage,
-                apiHost: config.actilive.apiHost,
+                // apiHost: config.actilive.apiHost,
                 platformId: config.actilive.platformId,
                 token: token,
             });
