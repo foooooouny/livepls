@@ -1,2 +1,2 @@
 start:
-	git pull && npm install && pkill node && node app.js
+	git pull && npm install && pm2 startOrRestart ecosystem.json5
