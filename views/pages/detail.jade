@@ -53,11 +53,12 @@ block content
       }
       if ('#{platformUserId}') {
         flashvars.platformUserId = '#{platformUserId}'
+        flashvars.settingPage =  '/user/my/' + '#{platformUserId}'
       }
       if ('#{platformId}') {
         flashvars.platformId = '#{platformId}'
       }
-      
+          
       console.log(flashvars)
       
       swfobject.embedSWF("http://flash.videojj.com/2.0/VideoJJ.swf?a="+Math.random(), "flashcontent", "820", "504", "10.0.0", "expressInstall.swf", flashvars, params, attributes);
