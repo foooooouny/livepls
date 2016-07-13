@@ -36,9 +36,13 @@ block content
                                         p#inputPersonStatus.form-control-static(name="personstatus") #{user.personstatus}
                                 - if (user.personstatus == "主播")
                                     .form-group.form-control-static
-                                        label.col-sm-2.control-label(for="inputPersonPage") 我的页面：
+                                        label.col-sm-2.control-label(for="inputPersonPage") 我的房间：
                                         .col-sm-10
                                             p#inputPersonPage.form-control-static(name="personpage") #{perpage}
+                                    .form-group.form-control-static
+                                        label.col-sm-2.control-label(for="inputLiveUrl") 我的流地址：
+                                        .col-sm-10
+                                            p#inputLiveUrl.form-control-static(name="liveUrl") #{user.liveurl}
                                     .form-group.form-control-static
                                         label.col-sm-2.control-label(for="inputPoster") 封面
                                         .col-sm-10
