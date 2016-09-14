@@ -73,7 +73,7 @@ block content
 
     script(type="text/javascript",src="/js/tool/aid.js")
     script(type="text/javascript",src="/js/information/index.js")
-    script(src="http://o6p1020jg.bkt.clouddn.com/actilive.js",type="text/javascript")
+    script(src="#{cdnJS ? cdnJS : '' }",type="text/javascript")
     script.
       new ActiLive({
         appRootId: 'hudong',

@@ -35,13 +35,23 @@ app.get('/',function(req , res) {
 //主播展示页面
 app.get('/user/:id',function(req , res) {
     var id = req.params.id;
+    var host = req.query.host
+    var platformId = null
+    var secret = null
+    if (host === 'http://liveapi.videojj.com') {
+        platformId = config.prod.platformId
+        secret = config.prod.secret
+    } else {
+        platformId = config.actilive.platformId
+        secret = config.actilive.secret
+    }
     fun.findOne(id, function(data) {
 
       var renderData = {
         title: data.nickname + '的直播间',
         user: data,
         platformUserId: id,
-        platformId: config.actilive.platformId,
+        platformId: platformId
       }
 
       if (req.session.myUser) { // 登录帐号
@@ -53,15 +63,15 @@ app.get('/user/:id',function(req , res) {
           myid:req.session.myUser.myid,
         })
 
-        if (req.session.myUser.myid == id ||
-          req.session.myUser.personstatus == '管理员') { // 主播的帐号 或 管理员帐号
-          var token = jwt.sign({
-              platformId: config.actilive.platformId,
-              platformUserId: id,
-          }, config.actilive.secret, {
-              expiresIn: 60 * 60 * 24 * 7, // s
-          })
-          renderData.token = token
+        if (req.session.myUser.myid == id || req.session.myUser.personstatus == '管理员') { // 主播的帐号 或 管理员帐号
+            var token = jwt.sign({
+                platformId: platformId,
+                platformUserId: id,
+            }, secret, {
+                expiresIn: 60 * 60 * 24 * 7, // s
+            })
+
+            renderData.token = token
         }
 
         res.render('detail', renderData);
@@ -75,11 +85,17 @@ app.get('/user/:id',function(req , res) {
 //个人信息页面
 app.get('/user/my/:id' , function(req , res) {
     var userId = req.params.id;
+    var host = req.query.host
+    var env = (host === 'http://liveapi.videojj.com' ? 'prod' : 'actilive')
+    var platformId = config[env].platformId
+    var secret = config[env].secret
+    var cdnJS = config[env].cdnJS
+    var cdnCSS = config[env].cdnCSS
     if (req.session.myUser && req.session.myUser.myid == userId) {
         var token = jwt.sign({
-            platformId: config.actilive.platformId,
+            platformId: platformId,
             platformUserId: userId,
-        }, config.actilive.secret, {
+        }, secret, {
             expiresIn: 60 * 60 * 24 * 7, // s
         })
 
@@ -94,8 +110,10 @@ app.get('/user/my/:id' , function(req , res) {
                 myid:req.session.myUser.myid,
                 perpage:req.session.myUser.personpage,
                 // apiHost: config.actilive.apiHost,
-                platformId: config.actilive.platformId,
+                platformId: platformId,
                 token: token,
+                cdnCSS: cdnCSS,
+                cdnJS: cdnJS
             });
         });
     } else {
