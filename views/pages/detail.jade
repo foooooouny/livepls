@@ -44,7 +44,7 @@ block content
           playFormat:2,
           mode:"RTMP",
           showControls:0,
-          path:"http://7xroga.com1.z0.glb.clouddn.com/testFlv/player_ui.swf",  //�����Ǹ���·����player_ui.swf
+          path:"#{flashUI}",  //�����Ǹ���·����player_ui.swf
           volume:0,
       };
       
@@ -61,5 +61,5 @@ block content
           
       console.log(flashvars)
       
-      swfobject.embedSWF("http://flash.videojj.com/2.0/VideoJJ.swf?a="+Math.random(), "flashcontent", "820", "504", "10.0.0", "expressInstall.swf", flashvars, params, attributes);
+      swfobject.embedSWF("#{flashApi}?a="+Math.random(), "flashcontent", "820", "504", "10.0.0", "expressInstall.swf", flashvars, params, attributes);
     })()

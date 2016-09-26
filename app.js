@@ -36,22 +36,22 @@ app.get('/',function(req , res) {
 app.get('/user/:id',function(req , res) {
     var id = req.params.id;
     var host = req.query.host
-    var platformId = null
-    var secret = null
-    if (host === 'http://liveapi.videojj.com') {
-        platformId = config.prod.platformId
-        secret = config.prod.secret
-    } else {
-        platformId = config.actilive.platformId
-        secret = config.actilive.secret
-    }
+    var env = (host === 'http://liveapi.videojj.com' ? 'prod' : 'actilive')
+    var platformId = config[env].platformId
+    var secret = config[env].secret
+    var flashUI = config[env].flashUI
+    var flashApi = config[env].flashApi
     fun.findOne(id, function(data) {
 
       var renderData = {
         title: data.nickname + '的直播间',
         user: data,
         platformUserId: id,
-        platformId: platformId
+        platformId: platformId,
+        flashUI: flashUI,
+        flashApi: flashApi,
+        env: env,
+        url: req.path
       }
 
       if (req.session.myUser) { // 登录帐号
@@ -113,7 +113,9 @@ app.get('/user/my/:id' , function(req , res) {
                 platformId: platformId,
                 token: token,
                 cdnCSS: cdnCSS,
-                cdnJS: cdnJS
+                cdnJS: cdnJS,
+                env: env,
+                url: req.path
             });
         });
     } else {

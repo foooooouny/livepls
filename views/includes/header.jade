@@ -37,7 +37,15 @@
             .col-md-8.col-sm-8.col-lg-8.absoultPostion(style="left:0px;")
                 a.logo(href="/")
                     img(src="http://vpls.cdn.videojj.com/navbar/logo-white.png")
-                label &nbsp;#{title}
+                label &nbsp;#{title}&nbsp;&nbsp;
+                - if (env)
+                    div(class="btn-group")
+                        - if(env === 'prod')
+                            a(class="btn btn-default btn-sm" href="#{url}") 测试
+                            a(class="btn btn-primary btn-sm" href="#{url}?host=http://liveapi.videojj.com") 生产
+                        - else
+                            a(class="btn btn-primary btn-sm" href="#{url}") 测试
+                            a(class="btn btn-default btn-sm" href="#{url}?host=http://liveapi.videojj.com") 生产
             .col-md-4.col-sm-4.col-lg-4.absoultPostion(style="text-align:right;right:10px;")
                 - if (mypersonstatus)
                     - if (mypersonstatus == "管理员")
