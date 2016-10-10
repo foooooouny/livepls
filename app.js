@@ -36,7 +36,7 @@ app.get('/',function(req , res) {
 app.get('/user/:id',function(req , res) {
     var id = req.params.id;
     var host = req.query.host
-    var env = (host === 'http://liveapi.videojj.com' ? 'prod' : 'actilive')
+    var env = (host === 'https://liveapi.videojj.com' ? 'prod' : 'actilive')
     var platformId = config[env].platformId
     var secret = config[env].secret
     var flashUI = config[env].flashUI
@@ -86,7 +86,7 @@ app.get('/user/:id',function(req , res) {
 app.get('/user/my/:id' , function(req , res) {
     var userId = req.params.id;
     var host = req.query.host
-    var env = (host === 'http://liveapi.videojj.com' ? 'prod' : 'actilive')
+    var env = (host === 'https://liveapi.videojj.com' ? 'prod' : 'actilive')
     var platformId = config[env].platformId
     var secret = config[env].secret
     var cdnJS = config[env].cdnJS
