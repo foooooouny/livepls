@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+    .container
+        div(style="width: 60%; margin: auto;")
+            form(action="/platform_switch" method="get")
+                .form-group
+                    label 平台id
+                    div(style="width:315px;")
+                        input(type="text" class="form-control" placeholder="PlatformId" name="platformId" value="#{platformId}")
+                .form-group
+                    label 平台密钥secret
+                    div(style="width:315px;")
+                        input(type="text" class="form-control" placeholder="Secret" name="secret" value='#{secret}')
+                .form-group
+                    label 平台用户id
+                    div(style="width:315px;")
+                        input(type="text" class="form-control" placeholder="PlatformUserId" name="platformUserId" value="#{platformUserId}")
+                .radio
+                    label
+                        - if (q === 'actilive')
+                            input(type="radio" name="q" value="actilive" id="dev" checked)
+                        - else
+                            input(type="radio" name="q" value="actilive" id="dev")
+                        span(style="color: gray; font-size: 12px;") 测试环境
+                    label(style="margin-left: 15px;")
+                        - if (q === 'prod')
+                            input(type="radio" name="q" value="prod" id="prod" checked)
+                        - else
+                            input(type="radio" name="q" value="prod" id="prod")
+                        span(style="color: gray; font-size: 12px;") 生产环境                        
+                div.btn-group
+                    button.submit(class="btn btn-primary") 确定
+                    a(class="btn btn-default" id="reset") 重置
+            div(style="margin-top: 30px;width: 315px;")
+                div(class="alert alert-warning") 请填入完整数据
+    script.
+        $('#reset').on('click', function () {
+            $('form input[type="text"]').val('')
+        })

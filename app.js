@@ -462,3 +462,49 @@ app.post("/adminDetail/register" , function (req ,res) {
         }
     })
 });
+
+// 执行切换平台
+app.get('/platform_switch', function (req, res) {
+    var platformId = req.query.platformId || ''
+    var platformUserId = req.query.platformUserId || ''
+    var secret = req.query.secret || ''
+    var isPassed = (platformId && platformUserId && secret)
+    var env = req.query.q || 'actilive'
+    var renderData = {
+        title: '切换平台',
+        platformId: platformId,
+        platformUserId: platformUserId,
+        secret: secret,
+        q: env,
+        cdnJS: config[env].cdnJS,
+        cdnCSS: config[env].cdnCSS,
+        flashUI: config[env].flashUI,
+        flashApi: config[env].flashApi
+    }
+    if (!req.query.force && isPassed) {
+        if (env === 'prod' && !req.query.first) {
+            var str = '/platform_switch?host=https://liveapi.videojj.com&first=1&platformId=' + platformId
+                + '&platformUserId=' + platformUserId + '&secret=' + secret + '&q=' + env
+            return res.redirect(str)
+        }
+        var token = jwt.sign({
+            platformId: platformId,
+            platformUserId: platformUserId,
+        }, secret, {
+            expiresIn: 60 * 60 * 24 * 7, // s
+        })
+        renderData.token = token
+        res.render('switchPlatformDetail', renderData)
+    } else {
+        if (req.session.myUser) { // 登录帐号
+            Object.assign(renderData, {
+                myusername: req.session.myUser.myusername,
+                mypersonstatus: req.session.myUser.personstatus,
+                myupgrade: req.session.myUser.myupgrade,
+                mynickname: req.session.myUser.nickname,
+                myid: req.session.myUser.myid,
+            })
+        }
+        res.render('switchPlatform', renderData)
+    }
+})
