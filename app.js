@@ -42,7 +42,8 @@ app.get('/user/:id',function(req , res) {
     var flashUI = config[env].flashUI
     var flashApi = config[env].flashApi
     fun.findOne(id, function(data) {
-
+      
+      if (!data) return res.send('主播未找到')
       var renderData = {
         title: data.nickname + '的直播间',
         user: data,
