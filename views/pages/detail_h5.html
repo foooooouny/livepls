@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>#{title}</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body, #app {
+            width: 100%;
+            height: 100%;
+        }
+
+        #controller {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10000;
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid #17DECB;
+        }
+
+        #video-container {
+            position: absolute;
+            width: 60%;
+            height: 40%;
+            left: 50%;
+            top: 50%;
+            transform: translate3d(-50%, -50%, 0)
+        }
+
+        #video {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+        }
+
+        #video video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+
+        #app {
+            z-index: 10;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+
+        #index {
+            font-size: 14px;
+            text-align: center;
+            overflow: hidden;
+            margin-top: 14px;
+        }
+
+        #index a {
+            padding: 14px;
+            background-color: lightblue;
+            display: inline-block;
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="index">
+        <a href="/user/#{platformUserId}">返回</a>
+    </div>
+    <div id="video-container">
+        <div id="app"></div>
+        <div id="video">
+            <video src="http://ocaurgauy.bkt.clouddn.com/videoplayback.mp4" autoplay onloadstart="this.volume=1" loop></video>
+        </div>
+    </div>
+</body>
+<script src="http://cytroncdn.videojj.com/dev/Iva.js"></script>
+<script>
+  window.addEventListener('load', function () {
+    new Iva('#app', {
+      live: true,
+      sourceJs: 'http://ocaurgauy.bkt.clouddn.com/liveOS.js' + '?t=' + Date.now(),
+      platformId: '#{platformId}',
+      platformUserId: '#{platformUserId}',
+      mode: 1,
+      events: {
+        onVideoAdArrived: function (tag) {
+          console.info('onVideoAdArrived')
+          if (!tag.ads.isPiP) {
+            video.pause()
+            video.volume = 0
+          }
+        },
+        onVideoAdLive: function (tag) {
+          console.info('onVideoAdLive')
+          if (!tag.ads.isPiP) {
+            video.play()
+            video.volume = 1
+          }
+        }
+      }
+    })
+  }, false)
+</script>
+
+</html>
