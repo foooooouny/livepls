@@ -36,11 +36,13 @@ app.get('/',function(req , res) {
 app.get('/user/h5/:id', function (req, res) {
     var id = req.params.id;
     var host = req.query.host;
+    var package = req.query.package || 'liveOSPackage'
     var env = (host === 'https://liveapi.videojj.com' ? 'prod' : 'actilive')
 
     var platformId = config[env].platformId
     var secret = config[env].secret
     var page = fs.readFileSync('./views/pages/detail_h5.html', 'utf8')
+    
 
     fun.findOne(id, function (data) {
         if (!data) return res.send('主播未找到')
@@ -48,11 +50,18 @@ app.get('/user/h5/:id', function (req, res) {
             platformUserId: id,
             platformId: platformId,
             env: env,
-            url: req.path
+            url: req.path,
+            package: package
         }
         page = page.replace(/#{platformId}/g, renderData.platformId)
         page = page.replace(/#{platformUserId}/g, renderData.platformUserId)
         page = page.replace(/#{title}/g, '用户 ' + renderData.platformUserId + ' 的房间')
+        page = page.replace(/#{jsPackage}/g, renderData.package)
+        if (renderData.package === 'mangoPackage') {
+            page = page.replace(/#{mango}/g, 'active')
+        } else {
+            page = page.replace(/#{liveos}/g, 'active')
+        }
         if (req.session.myUser) { // 登录帐号
             Object.assign(renderData, {
                 myusername: req.session.myUser.myusername,

@@ -55,7 +55,7 @@
             left: 0;
         }
 
-        #index {
+        #index, #package {
             font-size: 14px;
             text-align: center;
             overflow: hidden;
@@ -69,12 +69,28 @@
             color: black;
             text-decoration: none;
         }
+
+        #package a {
+            padding: 14px;
+            text-decoration: none;
+            color: black;
+            display: inline-block;
+            margin: 0 14px;
+        }
+        
+        #package a.active {
+            background-color: lightpink;
+        }
     </style>
 </head>
 
 <body>
     <div id="index">
         <a href="/user/#{platformUserId}">返回</a>
+    </div>
+    <div id='package'>
+        <a class="#{liveos}" href="/user/h5/#{platformUserId}">liveOS</a>
+        <a class="#{mango}" href="/user/h5/#{platformUserId}?package=mangoPackage">芒果定制</a>
     </div>
     <div id="video-container">
         <div id="app"></div>
@@ -88,7 +104,7 @@
   window.addEventListener('load', function () {
     new Iva('#app', {
       live: true,
-      sourceJs: 'http://ocaurgauy.bkt.clouddn.com/liveOS.js' + '?t=' + Date.now(),
+      sourceJs: 'http://ocaurgauy.bkt.clouddn.com/#{jsPackage}/liveOS.js' + '?t=' + Date.now(),
       platformId: '#{platformId}',
       platformUserId: '#{platformUserId}',
       mode: 1,
