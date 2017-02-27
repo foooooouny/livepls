@@ -33,61 +33,61 @@ app.get('/',function(req , res) {
     })
 });
 
-app.get('/user/h5/:id', function (req, res) {
-    var id = req.params.id;
-    var host = req.query.host;
-    var package = req.query.package || 'liveOSPackage'
-    var env = (host === 'https://liveapi.videojj.com' ? 'prod' : 'actilive')
+// app.get('/user/h5/:id', function (req, res) {
+//     var id = req.params.id;
+//     var host = req.query.host;
+//     var package = req.query.package || 'liveOSPackage'
+//     var env = (host === 'https://liveapi.videojj.com' ? 'prod' : 'actilive')
 
-    var platformId = config[env].platformId
-    var secret = config[env].secret
-    var page = fs.readFileSync('./views/pages/detail_h5.html', 'utf8')
+//     var platformId = config[env].platformId
+//     var secret = config[env].secret
+//     var page = fs.readFileSync('./views/pages/detail_h5.html', 'utf8')
     
 
-    fun.findOne(id, function (data) {
-        if (!data) return res.send('主播未找到')
-        var renderData = {
-            platformUserId: id,
-            platformId: platformId,
-            env: env,
-            url: req.path,
-            package: package
-        }
-        page = page.replace(/#{platformId}/g, renderData.platformId)
-        page = page.replace(/#{platformUserId}/g, renderData.platformUserId)
-        page = page.replace(/#{title}/g, '用户 ' + renderData.platformUserId + ' 的房间')
-        page = page.replace(/#{jsPackage}/g, renderData.package)
-        if (renderData.package === 'mangoPackage') {
-            page = page.replace(/#{mango}/g, 'active')
-        } else {
-            page = page.replace(/#{liveos}/g, 'active')
-        }
-        if (req.session.myUser) { // 登录帐号
-            Object.assign(renderData, {
-                myusername: req.session.myUser.myusername,
-                mypersonstatus: req.session.myUser.personstatus,
-                myupgrade: req.session.myUser.myupgrade,
-                mynickname: req.session.myUser.nickname,
-                myid: req.session.myUser.myid,
-            })
+//     fun.findOne(id, function (data) {
+//         if (!data) return res.send('主播未找到')
+//         var renderData = {
+//             platformUserId: id,
+//             platformId: platformId,
+//             env: env,
+//             url: req.path,
+//             package: package
+//         }
+//         page = page.replace(/#{platformId}/g, renderData.platformId)
+//         page = page.replace(/#{platformUserId}/g, renderData.platformUserId)
+//         page = page.replace(/#{title}/g, '用户 ' + renderData.platformUserId + ' 的房间')
+//         page = page.replace(/#{jsPackage}/g, renderData.package)
+//         if (renderData.package === 'mangoPackage') {
+//             page = page.replace(/#{mango}/g, 'active')
+//         } else {
+//             page = page.replace(/#{liveos}/g, 'active')
+//         }
+//         if (req.session.myUser) { // 登录帐号
+//             Object.assign(renderData, {
+//                 myusername: req.session.myUser.myusername,
+//                 mypersonstatus: req.session.myUser.personstatus,
+//                 myupgrade: req.session.myUser.myupgrade,
+//                 mynickname: req.session.myUser.nickname,
+//                 myid: req.session.myUser.myid,
+//             })
 
-            if (req.session.myUser.myid == id || req.session.myUser.personstatus == '管理员') { // 主播的帐号 或 管理员帐号
-                var token = jwt.sign({
-                    platformId: platformId,
-                    platformUserId: id,
-                }, secret, {
-                    expiresIn: 60 * 60 * 24 * 7, // s
-                })
+//             if (req.session.myUser.myid == id || req.session.myUser.personstatus == '管理员') { // 主播的帐号 或 管理员帐号
+//                 var token = jwt.sign({
+//                     platformId: platformId,
+//                     platformUserId: id,
+//                 }, secret, {
+//                     expiresIn: 60 * 60 * 24 * 7, // s
+//                 })
 
-                renderData.token = token
-            }
+//                 renderData.token = token
+//             }
 
-            res.send(page)
-      } else { //游客
-        res.send(page)
-      }
-    })
-});
+//             res.send(page)
+//       } else { //游客
+//         res.send(page)
+//       }
+//     })
+// });
 
 //主播展示页面
 app.get('/user/:id',function(req , res) {

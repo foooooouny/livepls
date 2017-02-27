@@ -45,11 +45,9 @@
                         - if(env === 'prod')
                             a(class="btn btn-default btn-sm" href="#{url}") 测试
                             a(class="btn btn-primary btn-sm" href="#{url}?host=https://liveapi.videojj.com") 生产
-                            a(class="btn btn-default btn-sm" href="/user/h5/#{myid}") 访问H5地址
                         - else
                             a(class="btn btn-primary btn-sm" href="#{url}") 测试
                             a(class="btn btn-default btn-sm" href="#{url}?host=https://liveapi.videojj.com") 生产
-                            a(class="btn btn-default btn-sm" href="/user/h5/#{platformUserId}") 访问H5地址
             .col-md-4.col-sm-4.col-lg-4.absoultPostion(style="text-align:right;right:10px;")
                 - if (mypersonstatus)
                     - if (mypersonstatus == "管理员")
