@@ -539,6 +539,18 @@ app.get('/platform_switch', function (req, res) {
         flashUI: config[env].flashUI,
         flashApi: config[env].flashApi
     }
+
+    if (req.session.myUser) { // 登录帐号
+        Object.assign(renderData, {
+            myusername: req.session.myUser.myusername,
+            mypersonstatus: req.session.myUser.personstatus,
+            myupgrade: req.session.myUser.myupgrade,
+            mynickname: req.session.myUser.nickname,
+            myid: req.session.myUser.myid,
+            mynickname:req.session.myUser.nickname,
+            myid:req.session.myUser.myid,
+        })
+    }
     if (!req.query.force && isPassed) {
         if (env === 'prod' && !req.query.first) {
             var str = '/platform_switch?host=https://liveapi.videojj.com&first=1&platformId=' + platformId
@@ -554,15 +566,6 @@ app.get('/platform_switch', function (req, res) {
         renderData.token = token
         res.render('switchPlatformDetail', renderData)
     } else {
-        if (req.session.myUser) { // 登录帐号
-            Object.assign(renderData, {
-                myusername: req.session.myUser.myusername,
-                mypersonstatus: req.session.myUser.personstatus,
-                myupgrade: req.session.myUser.myupgrade,
-                mynickname: req.session.myUser.nickname,
-                myid: req.session.myUser.myid,
-            })
-        }
         res.render('switchPlatform', renderData)
     }
 })

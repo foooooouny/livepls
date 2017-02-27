@@ -42,7 +42,9 @@ block content
                 mode:"RTMP",
                 showControls:1,
                 path:"#{flashUI}",  //�����Ǹ���·����player_ui.swf
-                volume:1
+                volume:1,
+                pid: '#{myid || ""}', // 登陆状态的用户号
+                pname: '#{mynickname || ""}', // 登陆状态的用户昵称
             };
       
             if ('#{token}') {
