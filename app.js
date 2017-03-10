@@ -546,9 +546,7 @@ app.get('/platform_switch', function (req, res) {
             mypersonstatus: req.session.myUser.personstatus,
             myupgrade: req.session.myUser.myupgrade,
             mynickname: req.session.myUser.nickname,
-            myid: req.session.myUser.myid,
-            mynickname:req.session.myUser.nickname,
-            myid:req.session.myUser.myid,
+            myid: req.session.myUser.myid
         })
     }
     if (!req.query.force && isPassed) {
