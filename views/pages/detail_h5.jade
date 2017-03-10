@@ -28,15 +28,15 @@ block content
     window.addEventListener('load', function () {
       new __LIVE_OS__.OS({
         appRootId: 'ActiLive',
-        platformId: '556c38e7ec69d5bf655a0fb2',
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF0Zm9ybUlkIjoiNTU2YzM4ZTdlYzY5ZDViZjY1NWEwZmIyIiwicGxhdGZvcm1Vc2VySWQiOiI0NyIsImlhdCI6MTQ4OTEzNzMwOCwiZXhwIjoxNDg5NzQyMTA4fQ.AsvmpASbCUqzEmqSoLbAph8lyo3zBg61oq8SWdBj3uc"
+        platformId: '#{platformId}',
+        token: "#{token}"
       });
       __LIVE_OS_SDK__.appContainer = document.querySelector('#live')
       
       new __LIVE_OS_SDK__.sdk({
         User: {
-          platformId: '556c38e7ec69d5bf655a0fb2',
-          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF0Zm9ybUlkIjoiNTU2YzM4ZTdlYzY5ZDViZjY1NWEwZmIyIiwicGxhdGZvcm1Vc2VySWQiOiI0NyIsImlhdCI6MTQ4OTEzNzMwOCwiZXhwIjoxNDg5NzQyMTA4fQ.AsvmpASbCUqzEmqSoLbAph8lyo3zBg61oq8SWdBj3uc"
+          platformId: '#{platformId}',
+          token: "#{token}"
         },
         Events: {}
         })
