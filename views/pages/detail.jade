@@ -15,6 +15,9 @@ block content
                 span.glyphicon.glyphicon-user(aria-hidden="true")
                 span.anchorFont &nbsp;#{user.nickname}
         .col-md-9
+          a(href="/user/#{platformUserId}" style="display: inline-block; padding: 0px 19px 10px;") flash 播放器
+          a(href="/user/#{platformUserId}/h5" style="display: inline-block; padding: 0px 19px 10px;") h5 播放器
+        .col-md-9
           #flashcontent(data-url="#{user.liveurl}",data-title="#{user.nickname}",style="width:90%;margin:0 auto;")
           input#flashUrl(type="hidden",data-url="#{user.liveurl}",data-title="#{user.nickname}")
         .col-md-3
@@ -22,7 +25,7 @@ block content
   script(src="http://7xl3wn.com2.z0.glb.qiniucdn.com/socket.io.min.js",type="text/javascript")
   script(src="http://7xjfim.com2.z0.glb.qiniucdn.com/Iva.js",type="text/javascript")
   script(src="/js/detail/play/swfobject.js",type="text/javascript")
-  script(type="text/javascript",src="/js/tool/duoshuo/duoshuo.js")
+  //- script(type="text/javascript",src="/js/tool/duoshuo/duoshuo.js")
   script(src="http://7xrfun.com1.z0.glb.clouddn.com/app.js",type="text/javascript")
   script.
     $(function() {
@@ -32,13 +35,6 @@ block content
           platformId: '#{platformId}',
           token: '#{token}',
           AnchorName: '#{user.nickname}'
-        });
-        new __LIVE_OS_SDK__.sdk({
-          User: {
-            platformId: '#{platformId}',
-            token: '#{token}'
-          },
-          Events: {}
         });
       }
     });
