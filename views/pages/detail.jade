@@ -30,7 +30,15 @@ block content
         new __LIVE_OS__.OS({
           appRootId: 'ActiLive',
           platformId: '#{platformId}',
-          token: '#{token}'
+          token: '#{token}',
+          AnchorName: '#{user.nickname}'
+        });
+        new __LIVE_OS_SDK__.sdk({
+          User: {
+            platformId: '#{platformId}',
+            token: '#{token}'
+          },
+          Events: {}
         });
       }
     });
