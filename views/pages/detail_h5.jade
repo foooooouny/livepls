@@ -28,7 +28,8 @@ block content
     window.addEventListener('load', function () {
       new __LIVE_OS__.OS({
         platformId: '#{platformId}',
-        token: "#{token}"
+        token: "#{token}",
+        AnchorName: '#{user.nickname}'
       });
       __LIVE_OS_SDK__.appContainer = document.querySelector('#live')
       
