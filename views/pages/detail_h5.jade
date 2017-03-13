@@ -15,8 +15,8 @@ block content
                 span.glyphicon.glyphicon-user(aria-hidden="true")
                 span.anchorFont &nbsp;#{user.nickname}
         .col-md-9
-          a(href="/user/#{platformUserId}" style="display: inline-block; padding: 0px 19px 10px;") flash 播放器
-          a(href="/user/#{platformUserId}/h5" style="display: inline-block; padding: 0px 19px 10px;") h5 播放器
+          a(href="/user/#{platformUserId}#{env === 'prod' ? '?host=https://liveapi.videojj.com' : '' }" style="display: inline-block; padding: 0px 19px 10px;") flash 播放器
+          a(href="/user/#{platformUserId}/h5#{env === 'prod' ? '?host=https://liveapi.videojj.com' : '' }" style="display: inline-block; padding: 0px 19px 10px;") h5 播放器
         .col-md-9
           #live
             video(src='http://ocaurgauy.bkt.clouddn.com/videoplayback.mp4', autoplay='', onloadstart='this.volume=0', loop='', style="width: 100%")

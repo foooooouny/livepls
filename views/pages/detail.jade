@@ -15,8 +15,8 @@ block content
                 span.glyphicon.glyphicon-user(aria-hidden="true")
                 span.anchorFont &nbsp;#{user.nickname}
         .col-md-9
-          a(href="/user/#{platformUserId}" style="display: inline-block; padding: 0px 19px 10px;") flash 播放器
-          a(href="/user/#{platformUserId}/h5" style="display: inline-block; padding: 0px 19px 10px;") h5 播放器
+          a(href="/user/#{platformUserId}#{env === 'prod' ? '?host=https://liveapi.videojj.com' : '' }" style="display: inline-block; padding: 0px 19px 10px;") flash 播放器
+          a(href="/user/#{platformUserId}/h5#{env === 'prod' ? '?host=https://liveapi.videojj.com' : '' }" style="display: inline-block; padding: 0px 19px 10px;") h5 播放器
         .col-md-9
           #flashcontent(data-url="#{user.liveurl}",data-title="#{user.nickname}",style="width:90%;margin:0 auto;")
           input#flashUrl(type="hidden",data-url="#{user.liveurl}",data-title="#{user.nickname}")
