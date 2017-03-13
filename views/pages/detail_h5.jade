@@ -27,7 +27,6 @@ block content
   script.
     window.addEventListener('load', function () {
       new __LIVE_OS__.OS({
-        appRootId: 'ActiLive',
         platformId: '#{platformId}',
         token: "#{token}"
       });
@@ -36,7 +35,8 @@ block content
       new __LIVE_OS_SDK__.sdk({
         User: {
           platformId: '#{platformId}',
-          token: "#{token}"
+          token: "#{token}",
+          platformUserId:"#{platformUserId}"
         },
         Events: {}
         })
