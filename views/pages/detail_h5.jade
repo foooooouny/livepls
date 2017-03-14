@@ -2,43 +2,43 @@ extends ../layout
 
 block content
 
-  .container
-    #ActiLive
-    .row
-        .col-md-12.anchorHeader
-            .col-md-1.anchorTitleImg
-                img(src="#{user.poster}")
-            .col-md-11.anchorTitleContent
-                p #{user.summary} &nbsp;&nbsp;
-                  if token
-                    button(type="button", style="font-size: 12px; display: inline-block; padding: 8px;", onclick="__LIVE_OS__.AdsVoteModal.register()") 发起熊猫定制投票
-                span.glyphicon.glyphicon-user(aria-hidden="true")
-                span.anchorFont &nbsp;#{user.nickname}
-        .col-md-9
-          a(href="/user/#{platformUserId}#{env === 'prod' ? '?host=https://liveapi.videojj.com' : '' }" style="display: inline-block; padding: 0px 19px 10px;") flash 播放器
-          a(href="/user/#{platformUserId}/h5#{env === 'prod' ? '?host=https://liveapi.videojj.com' : '' }" style="display: inline-block; padding: 0px 19px 10px;") h5 播放器
-        .col-md-9
-          #live
-            video(src='http://ocaurgauy.bkt.clouddn.com/videoplayback.mp4', autoplay='', onloadstart='this.volume=0', loop='', style="width: 100%")
-        .col-md-3
-            .ds-thread(data-thread-key="#{user.id}",data-title="#{user.nickname}",data-url="#{user.liveurl}")
-  script(src="http://7xl3wn.com2.z0.glb.qiniucdn.com/socket.io.min.js",type="text/javascript")
-  script(src="http://7xrfun.com1.z0.glb.clouddn.com/app.js",type="text/javascript")
-  script.
-    window.addEventListener('load', function () {
-      new __LIVE_OS__.OS({
-        platformId: '#{platformId}',
-        token: "#{token}",
-        AnchorName: '#{user.nickname}'
-      });
-      __LIVE_OS_SDK__.appContainer = document.querySelector('#live')
-      
-      new __LIVE_OS_SDK__.sdk({
-        User: {
-          platformId: '#{platformId}',
-          token: "#{token}",
-          platformUserId:"#{platformUserId}"
-        },
-        Events: {}
+    .container
+        #ActiLive
+        .row
+            .col-md-12.anchorHeader
+                .col-md-1.anchorTitleImg
+                    img(src="#{user.poster}")
+                .col-md-11.anchorTitleContent
+                    p #{user.summary} &nbsp;&nbsp;
+                        if token
+                            button(type="button", style="font-size: 12px; display: inline-block; padding: 8px;", onclick="__LIVE_OS__.AdsVoteModal.register()") 发起熊猫定制投票
+                    span.glyphicon.glyphicon-user(aria-hidden="true")
+                    span.anchorFont &nbsp;#{user.nickname}
+            .col-md-12
+                a(href="/user/#{platformUserId}#{env === 'prod' ? '?host=https://liveapi.videojj.com' : '' }" style="display: inline-block; padding: 0px 19px 10px;") flash 播放器
+                a(href="/user/#{platformUserId}/h5#{env === 'prod' ? '?host=https://liveapi.videojj.com' : '' }" style="display: inline-block; padding: 0px 19px 10px;") h5 播放器
+            .col-md-9
+                #live(style="position:releative;width:100%;")
+                video(src='http://ocaurgauy.bkt.clouddn.com/videoplayback.mp4', autoplay='', onloadstart='this.volume=0', loop='', style="width: 100%")
+            .col-md-3
+                .ds-thread(data-thread-key="#{user.id}",data-title="#{user.nickname}",data-url="#{user.liveurl}")
+    script(src="http://7xl3wn.com2.z0.glb.qiniucdn.com/socket.io.min.js",type="text/javascript")
+    script(src="http://7xrfun.com1.z0.glb.clouddn.com/app.js",type="text/javascript")
+    script.
+        window.addEventListener('load', function () {
+            new __LIVE_OS__.OS({
+                platformId: '#{platformId}',
+                token: "#{token}",
+                AnchorName: '#{user.nickname}'
+            });
+            __LIVE_OS_SDK__.appContainer = document.querySelector('#live')
+
+            new __LIVE_OS_SDK__.sdk({
+                User: {
+                    platformId: '#{platformId}',
+                    token: "#{token}",
+                    platformUserId:"#{platformUserId}"
+                },
+                Events: {}
+                })
         })
-    })
