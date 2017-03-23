@@ -147,6 +147,8 @@ app.get('/user/:id/h5',function(req , res) {
     var secret = config[env].secret
     var flashUI = config[env].flashUI
     var flashApi = config[env].flashApi
+
+    // res.set('Referrer-Policy', "no-referrer")
     fun.findOne(id, function(data) {
       
       if (!data) return res.send('主播未找到')
