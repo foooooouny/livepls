@@ -7,7 +7,7 @@ block content
         .row
             .col-md-12.anchorHeader
                 .col-md-1.anchorTitleImg
-                    img(src="#{user.poster}")
+                    img(src="#{user.poster}" onerror="this.onerror=null;this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ff8owMzrwaO9WK0XW2Xwd4S4DKzh9vZ_8FKLqvum61G6A7wK'")
                 .col-md-11.anchorTitleContent
                     p #{user.summary} &nbsp;&nbsp;
                         if token
