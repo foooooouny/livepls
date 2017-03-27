@@ -7,7 +7,7 @@ block content
                     .col-md-2.col-sm-3
                         .thumbnail
                             a(href="/user/#{item.id}")
-                                img.anchorPoster(src="#{item.poster}",alt="#{item.nickname}")
+                                img.anchorPoster(src="#{item.poster}" onerror="this.onerror=null;this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ff8owMzrwaO9WK0XW2Xwd4S4DKzh9vZ_8FKLqvum61G6A7wK'")
                             .caption
                                 //h6 #{item.summary}
                                 p: a.btn.btn-primary(href="/user/#{item.id}" , role="button") 观看直播
