@@ -3,6 +3,10 @@ link(rel="styleSheet",href="/css/style.css")
 link(rel="styleSheet",href="#{cdnCSS ? cdnCSS : '' }")
 script(src="/libs/jquery/dist/jquery.min.js",type="text/javascript")
 script(src="/libs/bootstrap/dist/js/bootstrap.min.js",type="text/javascript")
+script.
+    function _login() {
+        location.href="/login"
+    }
 if env === 'prod'
     script(src="https://sdkcdn.videojj.com/liveOSSdk/SDK.js")
     script(src="https://sdkcdn.videojj.com/liveOSPanda/liveOS.js")
