@@ -81,6 +81,7 @@ function insertUser(options, callback) {
         method: 'POST'
     }, function (err, res) {
         if (err) return callback(err)
+        callback(null)
     })
 }
 
@@ -96,7 +97,7 @@ function renderUser(options, callback) {
                     options.platToken = result.result.token
                     insertUser(options, function (err) {
                         if (err) return callback(err)
-                        getToken(options, function(err, result) {
+                        getToken(options, function (err, result) {
                             callback(null, result.result.token)
                         })
                     })
@@ -280,7 +281,7 @@ app.get('/user/my/:id', function (req, res) {
             })
 
         fun.findOne(userId, function (data) {
-            res.render('information', {
+            var renderData = {
                 title: '个人信息页面',
                 user: data,
                 myusername: req.session.myUser.myusername,
@@ -291,12 +292,27 @@ app.get('/user/my/:id', function (req, res) {
                 perpage: req.session.myUser.personpage,
                 // apiHost: config.actilive.apiHost,
                 platformId: platformId,
-                token: token,
                 cdnCSS: cdnCSS,
                 cdnJS: cdnJS,
                 env: env,
                 url: req.path
-            });
+            }
+
+            var options = {
+                env: env,
+                platformId: platformId,
+                platformUserId: userId,
+                secret: secret,
+                username: req.session.myUser.nickname
+            }
+            renderUser(options, function (err, token) {
+                if (err) {
+                    console.log(err)
+                    return res.send('render error')
+                }
+                renderData.token = token
+                res.render('information', renderData);
+            })
         });
     } else {
         res.redirect("/login");
