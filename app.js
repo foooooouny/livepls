@@ -186,6 +186,8 @@ app.get('/user/:id', function (req, res) {
                     renderData.token = token
                     res.render('detail', renderData);
                 })
+            } else {
+                res.render('detail', renderData);
             }
         } else { //游客
             res.render('detail', renderData);
@@ -250,6 +252,8 @@ app.get('/user/:id/h5', function (req, res) {
                     renderData.token = token
                     res.render('detail_h5', renderData);
                 })
+            } else {
+                res.render('detail_h5', renderData);
             }
         } else { //游客
             res.render('detail_h5', renderData);
