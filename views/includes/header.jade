@@ -38,8 +38,6 @@
                 a.logo(href="/")
                     img(src="http://vpls.cdn.videojj.com/navbar/logo-white.png")
                 label &nbsp;#{title}&nbsp;&nbsp;
-                - if (title === '首页')
-                    a(class="btn btn-default btn-sm" href="/platform_switch") 切换平台
                 - if (env)
                     div(class="btn-group")
                         - if(env === 'prod')

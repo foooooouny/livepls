@@ -573,7 +573,7 @@ app.post("/adminDetail/register" , function (req ,res) {
 });
 
 // 执行切换平台
-app.get('/platform_switch', function (req, res) {
+app.get('/plat_secret', function (req, res) {
     var platformId = req.query.platformId || ''
     var platformUserId = req.query.platformUserId || ''
     var secret = req.query.secret || ''
@@ -590,6 +590,8 @@ app.get('/platform_switch', function (req, res) {
         flashUI: config[env].flashUI,
         flashApi: config[env].flashApi
     }
+
+    if (req.session.myUser.myusername !== 'yzbissb') return res.send('not found')
 
     if (req.session.myUser) { // 登录帐号
         Object.assign(renderData, {
@@ -617,4 +619,8 @@ app.get('/platform_switch', function (req, res) {
     } else {
         res.render('switchPlatform', renderData)
     }
+})
+
+app.get('*', function (req, res, next) {
+    res.send('not found')
 })
