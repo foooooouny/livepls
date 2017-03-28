@@ -604,7 +604,7 @@ app.get('/plat_secret', function (req, res) {
     }
     if (!req.query.force && isPassed) {
         if (env === 'prod' && !req.query.first) {
-            var str = '/platform_switch?host=https://liveapi.videojj.com&first=1&platformId=' + platformId
+            var str = '/plat_secret?host=https://liveapi.videojj.com&first=1&platformId=' + platformId
                 + '&platformUserId=' + platformUserId + '&secret=' + secret + '&q=' + env
             return res.redirect(str)
         }
