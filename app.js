@@ -273,6 +273,9 @@ app.get('/user/my/:id', function (req, res) {
     var cdnJS = config[env].cdnJS
     var cdnCSS = config[env].cdnCSS
     if (req.session.myUser && req.session.myUser.myid == userId) {
+        if (req.session.myUser.personstatus === '游客') {
+            return res.redirect('/')
+        }
         var token = jwt.sign({
             platformId: platformId,
             platformUserId: userId,
