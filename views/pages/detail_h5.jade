@@ -28,7 +28,8 @@ block content
             new __LIVE_OS__.OS({
                 platformId: '#{platformId}',
                 token: "#{token}",
-                AnchorName: '#{user.nickname}'
+                AnchorName: '#{user.nickname}',
+                pid:'#{myid}'
             });
             __LIVE_OS_SDK__.appContainer = document.querySelector('#live')
             __LIVE_OS_SDK__.playerContainer = document.querySelector('#live')
