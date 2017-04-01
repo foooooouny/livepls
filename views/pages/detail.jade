@@ -12,6 +12,7 @@ block content
                 p #{user.summary} &nbsp;&nbsp;
                   if token
                     button(type="button", style="font-size: 12px; display: inline-block; padding: 8px;", onclick="__LIVE_OS__.AdsVoteModal.register()") 发起熊猫定制投票
+                    button(type="button",id="isRoomExistVote") 发起投票高亮测试
                 span.glyphicon.glyphicon-user(aria-hidden="true")
                 span.anchorFont &nbsp;#{user.nickname}
         .col-md-9
@@ -36,6 +37,21 @@ block content
           token: '#{token}',
           AnchorName: '#{user.nickname}'
         });
+        __LIVE_OS__.Events.onRoomVoteStatusUpdate = function (type, value) {
+          switch (String(type)) {
+            case 'isRoomExistVote':
+              if (value === 'true') {
+                document.querySelector('#isRoomExistVote').setAttribute('disabled', 'disabled')
+              } else if (value === 'false') {
+                document.querySelector('#isRoomExistVote').removeAttribute('disabled')
+              } else {
+                return
+              }
+              break
+            default:
+              break
+          }
+        };
       }
     });
 
