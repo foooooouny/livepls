@@ -11,8 +11,7 @@ block content
             .col-md-11.anchorTitleContent
                 p #{user.summary} &nbsp;&nbsp;
                   if token
-                    button(type="button", style="font-size: 12px; display: inline-block; padding: 8px;", onclick="__LIVE_OS__.AdsVoteModal.register()") 发起熊猫定制投票
-                    button(type="button",id="isRoomExistVote") 发起投票高亮测试
+                    button(type="button", style="font-size: 12px; display: inline-block; padding: 8px;", id="addPandaVote") 发起熊猫定制投票
                 span.glyphicon.glyphicon-user(aria-hidden="true")
                 span.anchorFont &nbsp;#{user.nickname}
         .col-md-9
@@ -29,8 +28,17 @@ block content
   //- script(type="text/javascript",src="/js/tool/duoshuo/duoshuo.js")
   script(src="http://7xrfun.com1.z0.glb.clouddn.com/app.js",type="text/javascript")
   script.
+    var isRoomExistVote = false;
+    window.isRoomExistVote = isRoomExistVote;  
     $(function() {
       if ('#{token}') {
+        document.querySelector('#addPandaVote').onclick=function(){
+          if(window.isRoomExistVote){
+            alert('重複創建投票')
+          }else{
+            __LIVE_OS__.AdsVoteModal.register()
+          }
+        }
         new __LIVE_OS__.OS({
           appRootId: 'ActiLive',
           platformId: '#{platformId}',
@@ -41,9 +49,9 @@ block content
           switch (String(type)) {
             case 'isRoomExistVote':
               if (value === 'hasVote') {
-                document.querySelector('#isRoomExistVote').setAttribute('disabled', 'disabled')
+                window.isRoomExistVote = true;
               } else if (value === 'noVote') {
-                document.querySelector('#isRoomExistVote').removeAttribute('disabled')
+                window.isRoomExistVote = false;                
               } else {
                 return
               }
