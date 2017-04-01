@@ -40,9 +40,9 @@ block content
         __LIVE_OS__.Events.onRoomVoteStatusUpdate = function (type, value) {
           switch (String(type)) {
             case 'isRoomExistVote':
-              if (value == 'true') {
+              if (value === 'hasVote') {
                 document.querySelector('#isRoomExistVote').setAttribute('disabled', 'disabled')
-              } else if (value == 'false') {
+              } else if (value === 'noVote') {
                 document.querySelector('#isRoomExistVote').removeAttribute('disabled')
               } else {
                 return
