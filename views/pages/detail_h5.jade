@@ -11,7 +11,7 @@ block content
                 .col-md-11.anchorTitleContent
                     p #{user.summary} &nbsp;&nbsp;
                         if token
-                            button(type="button", style="font-size: 12px; display: inline-block; padding: 8px;", onclick="__LIVE_OS__.AdsVoteModal.register()") 发起熊猫定制投票
+                            button(type="button", style="font-size: 12px; display: inline-block; padding: 8px;", id="addPandaVote") 发起熊猫定制投票
                     span.glyphicon.glyphicon-user(aria-hidden="true")
                     span.anchorFont &nbsp;#{user.nickname}
             .col-md-12
@@ -25,20 +25,49 @@ block content
     script(src="http://7xl3wn.com2.z0.glb.qiniucdn.com/socket.io.min.js",type="text/javascript")
     script.
         window.addEventListener('load', function () {
-            new __LIVE_OS__.OS({
-                platformId: '#{platformId}',
-                token: "#{token}",
-                AnchorName: '#{user.nickname}'
-            });
-            __LIVE_OS_SDK__.appContainer = document.querySelector('#live')
-            __LIVE_OS_SDK__.playContainer = document.querySelector('#live')
+            var $addPandaVote=document.querySelector('#addPandaVote');            
+            var isRoomExistVote = false;
+            window.isRoomExistVote = isRoomExistVote;
 
-            new __LIVE_OS_SDK__.sdk({
-                User: {
+            if($addPandaVote){
+                $addPandaVote.onclick=function(){
+                    if(window.isRoomExistVote){
+                        alert('重複創建投票')
+                    }else{
+                        __LIVE_OS__.AdsVoteModal.register()
+                    }
+                }            
+                new __LIVE_OS__.OS({
                     platformId: '#{platformId}',
                     token: "#{token}",
-                    platformUserId:"#{platformUserId}"
-                },
-                Events: {}
-                })
+                    AnchorName: '#{user.nickname}',
+                    pid:'#{myid}'
+                });
+                __LIVE_OS__.Events.onRoomVoteStatusUpdate = function (type, value) {
+                switch (String(type)) {
+                    case 'isRoomExistVote':
+                    if (value === 'hasVote') {
+                        window.isRoomExistVote = true;
+                    } else if (value === 'noVote') {
+                        window.isRoomExistVote = false;                
+                    } else {
+                        return
+                    }
+                    break
+                    default:
+                    break
+                }
+                };
+                __LIVE_OS_SDK__.appContainer = document.querySelector('#live')
+                __LIVE_OS_SDK__.playerContainer = document.querySelector('#live')
+
+                new __LIVE_OS_SDK__.sdk({
+                    User: {
+                        platformId: '#{platformId}',
+                        token: "#{token}",
+                        platformUserId:"#{platformUserId}"
+                    },
+                    Events: {}
+                    })
+            }
         })
