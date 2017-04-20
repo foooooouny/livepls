@@ -314,6 +314,11 @@ app.get('/user/my/:id', function (req, res) {
                     return res.send('render error')
                 }
                 renderData.token = token
+                if (req.query.fencheng) {
+                    renderData.fencheng = 'active'
+                } else {
+                    renderData.hudong = 'active'
+                }
                 res.render('information', renderData);
             })
         });

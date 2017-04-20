@@ -8,16 +8,16 @@ block content
     .container
         .row
             .col-xs-12.col-sm-3
-                div.list-group.bg-white.select-item.active
-                    a.list-group-item.disabled(href="#hudong",data-toggle="tab") 互动设置
                 div.list-group.bg-white.select-item
-                    a.list-group-item(href="#fencheng",data-toggle="tab") 分成设置                    
+                    a.list-group-item(class="#{fencheng ? '' : 'disabled'}" href="/user/my/#{myid}") 互动设置
+                div.list-group.bg-white.select-item
+                    a.list-group-item(class="#{fencheng ? 'disabled' : ''}" href="/user/my/#{myid}?fencheng=1") 分成设置                    
                 div.list-group.bg-white.select-item
                     a.list-group-item(href="#msg",data-toggle="tab") 信息设置
             .col-xs-12.col-sm-9
-                .fade.in.setting-panel.active#hudong(style='height:0; min-height:600px; min-width:800px;')
+                .fade.in.setting-panel(class="#{fencheng ? '' : 'active'}" style='height:0; min-height:600px; min-width:800px;')#hudong
                     section
-                .fade.in.setting-panel#fencheng(style='height:0; min-height:600px; min-width:800px;')
+                .fade.in.setting-panel(class="#{fencheng ? 'active' : ''}" style='height:0; min-height:600px; min-width:800px;')#fencheng
                     section
                 .fade.setting-panel#msg
                     section.panel.panel-default.portlet-item
@@ -77,19 +77,20 @@ block content
 
     script(type="text/javascript",src="/js/tool/aid.js")
     script(type="text/javascript",src="/js/information/index.js")
-    script(src="#{cdnJS ? cdnJS : '' }",type="text/javascript")
-    script(src="http://videojj-cdn.oss-cn-beijing.aliyuncs.com/actilive/distribution/dev/actilive.js")
-    script.
-      new ActiLive({
-        appRootId: 'hudong',
-        //- apiHost: '#{apiHost}', // 生产时不要填，默认是 live.videojj.com
-        platformId: '#{platformId}',
-        token: '#{token}',
-      })
-
-      __CONTRIACTILIVE__.create({
-        appRootId: 'fencheng',  // 挂载DOM id
-        platformId: '#{platformId}',  // 平台id
-        token: '#{token}',       // 主播token
-      })
-          
+    if hudong
+        script(src="#{cdnJS ? cdnJS : '' }",type="text/javascript")
+        script.
+            new ActiLive({
+                appRootId: 'hudong',
+                //- apiHost: '#{apiHost}', // 生产时不要填，默认是 live.videojj.com
+                platformId: '#{platformId}',
+                token: '#{token}',
+            })
+    if fencheng
+        script(src="http://videojj-cdn.oss-cn-beijing.aliyuncs.com/actilive/distribution/dev/actilive.js")
+        script.
+            __CONTRIACTILIVE__.create({
+                appRootId: 'fencheng',  // 挂载DOM id
+                platformId: '#{platformId}',  // 平台id
+                token: '#{token}',       // 主播token
+            })
