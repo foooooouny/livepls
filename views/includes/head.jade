@@ -8,8 +8,8 @@ script.
         location.href="/login"
     }
 if env === 'prod'
-    script(src="https://sdkcdn.videojj.com/liveOSSdk/SDK.js")
-    script(src="https://sdkcdn.videojj.com/liveOSPanda/liveOS.js")
+    script(src="https://sdkcdn.videojj.com/liveOSSdk/SDK.js?t=#{Date.now()}")
+    script(src="https://sdkcdn.videojj.com/liveOSPanda/liveOS.js?t=#{Date.now()}")
 else
-    script(src="https://sdkcdn.videojj.com/liveOSSdk/develop/SDK.js")
-    script(src="https://sdkcdn.videojj.com/liveOSPanda/develop/liveOS.js")
+    script(src="https://sdkcdn.videojj.com/liveOSSdk/develop/SDK.js?t=#{Date.now()}")
+    script(src="https://sdkcdn.videojj.com/liveOSPanda/develop/liveOS.js?t=#{Date.now()}")
