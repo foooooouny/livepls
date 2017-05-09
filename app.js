@@ -319,6 +319,7 @@ app.get('/user/my/:id', function (req, res) {
                 } else {
                     renderData.hudong = 'active'
                 }
+                renderData.t = Date.now()
                 res.render('information', renderData);
             })
         });
